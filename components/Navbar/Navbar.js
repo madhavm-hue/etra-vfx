@@ -1,23 +1,28 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
 
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import "./navbar.css";
 
 const navLinks = [
   {
-    label: "Work",
-    href: "/portfolio",
+    label: "Home",
+    href: "/",
   },
   {
     label: "Services",
     href: "/services",
   },
   {
-    label: "About",
+    label: "Portfolio",
+    href: "/portfolio",
+  },
+  {
+    label: "About Us",
     href: "/about",
   },
   {
@@ -33,11 +38,138 @@ const navLinks = [
 export default function Navbar() {
   const pathname = usePathname();
 
-  return (
-    <header className="site-header">
-      <div className="site-container navbar-inner">
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [introReady, setIntroReady] = useState(false);
 
-        <Link href="/" className="navbar-logo" aria-label="ETRA VFX Home">
+  const [navbarVisible, setNavbarVisible] = useState(
+    pathname !== "/",
+  );
+
+  /* CLOSE MOBILE MENU WITH ESCAPE */
+
+  useEffect(() => {
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener(
+        "keydown",
+        handleEscape,
+      );
+    };
+  }, []);
+
+  /* MOBILE MENU SCROLL LOCK */
+
+  useEffect(() => {
+    if (!menuOpen) {
+      return;
+    }
+
+    const previousOverflow =
+      document.body.style.overflow;
+
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow =
+        previousOverflow;
+    };
+  }, [menuOpen]);
+
+  /* WAIT UNTIL AUTOMATIC ETRA ZOOM FINISHES */
+
+  useEffect(() => {
+    if (pathname !== "/") {
+      return;
+    }
+
+    const handleIntroReady = () => {
+      setIntroReady(true);
+    };
+
+    window.addEventListener(
+      "etra:intro-ready",
+      handleIntroReady,
+    );
+
+    return () => {
+      window.removeEventListener(
+        "etra:intro-ready",
+        handleIntroReady,
+      );
+    };
+  }, [pathname]);
+
+  /* SHOW NAVBAR AFTER FIRST LIGHT SCROLL */
+
+  useEffect(() => {
+    if (pathname !== "/" || !introReady) {
+      return;
+    }
+
+    const handleFirstScroll = () => {
+      if (window.scrollY > 8) {
+        setNavbarVisible(true);
+      }
+    };
+
+    window.addEventListener(
+      "scroll",
+      handleFirstScroll,
+      { passive: true },
+    );
+
+    return () => {
+      window.removeEventListener(
+        "scroll",
+        handleFirstScroll,
+      );
+    };
+  }, [pathname, introReady]);
+
+  const isActiveLink = (href) => {
+    if (href === "/") {
+      return pathname === "/";
+    }
+
+    return (
+      pathname === href ||
+      pathname.startsWith(`${href}/`)
+    );
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
+  const toggleMenu = () => {
+    setMenuOpen((currentState) => !currentState);
+  };
+
+  const headerClasses = [
+    "site-header",
+    pathname === "/" ? "home-intro-header" : "",
+    navbarVisible ? "navbar-visible" : "",
+    menuOpen ? "menu-open" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  return (
+    <header className={headerClasses}>
+      <div className="site-container navbar-inner">
+        <Link
+          href="/"
+          className="navbar-logo"
+          aria-label="ETRA VFX Home"
+          onClick={closeMenu}
+        >
           <Image
             src="/images/common/etra-vfx-logo-light.png"
             alt="ETRA VFX"
@@ -49,23 +181,32 @@ export default function Navbar() {
 
           <Image
             src="/images/common/etra-vfx-logo-dark.png"
-            alt="ETRA VFX"
+            alt=""
             width={180}
             height={60}
             priority
+            aria-hidden="true"
             className="logo logo-dark"
           />
         </Link>
 
-        <nav className="navbar-nav" aria-label="Main navigation">
+        <nav
+          className="navbar-nav"
+          aria-label="Main navigation"
+        >
           {navLinks.map((item) => {
-            const active = pathname === item.href;
+            const active = isActiveLink(item.href);
 
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`navbar-link ${active ? "active" : ""}`}
+                className={`navbar-link ${
+                  active ? "active" : ""
+                }`}
+                aria-current={
+                  active ? "page" : undefined
+                }
               >
                 {item.label}
               </Link>
@@ -75,8 +216,61 @@ export default function Navbar() {
 
         <div className="navbar-actions">
           <ThemeToggle />
-        </div>
 
+          <button
+            type="button"
+            className="menu-toggle"
+            onClick={toggleMenu}
+            aria-label={
+              menuOpen
+                ? "Close navigation menu"
+                : "Open navigation menu"
+            }
+            aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
+          >
+            <span />
+            <span />
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="mobile-navigation"
+        className="mobile-menu"
+        aria-hidden={!menuOpen}
+      >
+        <nav
+          className="site-container mobile-menu-nav"
+          aria-label="Mobile navigation"
+        >
+          {navLinks.map((item, index) => {
+            const active = isActiveLink(item.href);
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={closeMenu}
+                className={`mobile-menu-link ${
+                  active ? "active" : ""
+                }`}
+                aria-current={
+                  active ? "page" : undefined
+                }
+              >
+                <span className="mobile-menu-number">
+                  {String(index + 1).padStart(
+                    2,
+                    "0",
+                  )}
+                </span>
+
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
+        </nav>
       </div>
     </header>
   );

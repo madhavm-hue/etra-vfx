@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar/Navbar";
+import Intro from "../components/Intro/Intro";
 
 export default function Home() {
   return (
@@ -6,7 +7,7 @@ export default function Home() {
       <Navbar />
 
       <main>
-        {/* Home page sections inga one by one varum */}
+        <Intro />
       </main>
     </>
   );
