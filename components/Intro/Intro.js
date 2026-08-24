@@ -16,7 +16,7 @@ export default function Intro() {
 
   const duration = reduceMotion ? 0.2 : 4.5;
 
-  /* LOCK SCROLL UNTIL ETRA ZOOM COMPLETES */
+  /* LOCK SCROLL UNTIL AUTOMATIC ZOOM FINISHES */
 
   useEffect(() => {
     document.body.style.overflow = videoRevealed
@@ -55,7 +55,7 @@ export default function Intro() {
     };
   }, [videoRevealed]);
 
-  /* AUTOMATIC ETRA ZOOM COMPLETE */
+  /* NOTIFY NAVBAR WHEN VIDEO IS FULLY REVEALED */
 
   const handleRevealComplete = () => {
     setVideoRevealed(true);
@@ -63,6 +63,16 @@ export default function Intro() {
     window.dispatchEvent(
       new CustomEvent("etra:intro-ready"),
     );
+  };
+
+  const textAnimation = {
+    scale: reduceMotion ? 24 : [1, 1, 24],
+  };
+
+  const textTransition = {
+    duration,
+    times: [0, 0.2, 1],
+    ease: [0.76, 0, 0.24, 1],
   };
 
   return (
@@ -99,15 +109,17 @@ export default function Intro() {
               handleRevealComplete
             }
           >
+            {/* DESKTOP / TABLET MASK */}
+
             <svg
-              className="intro-mask"
+              className="intro-mask intro-mask-desktop"
               viewBox="0 0 1600 900"
               preserveAspectRatio="xMidYMid slice"
               aria-hidden="true"
             >
               <defs>
                 <mask
-                  id="etra-opening-mask"
+                  id="etra-desktop-mask"
                   x="0"
                   y="0"
                   width="1600"
@@ -125,19 +137,11 @@ export default function Intro() {
                     y="450"
                     textAnchor="middle"
                     dominantBaseline="middle"
-                    className="intro-mask-text"
+                    className="intro-mask-text intro-mask-text-desktop"
                     fill="black"
                     initial={{ scale: 1 }}
-                    animate={{
-                      scale: reduceMotion
-                        ? 22
-                        : [1, 1, 22],
-                    }}
-                    transition={{
-                      duration,
-                      times: [0, 0.2, 1],
-                      ease: [0.76, 0, 0.24, 1],
-                    }}
+                    animate={textAnimation}
+                    transition={textTransition}
                   >
                     ETRA
                   </motion.text>
@@ -148,7 +152,54 @@ export default function Intro() {
                 width="1600"
                 height="900"
                 className="intro-mask-background"
-                mask="url(#etra-opening-mask)"
+                mask="url(#etra-desktop-mask)"
+              />
+            </svg>
+
+            {/* MOBILE PORTRAIT MASK */}
+
+            <svg
+              className="intro-mask intro-mask-mobile"
+              viewBox="0 0 800 1600"
+              preserveAspectRatio="xMidYMid slice"
+              aria-hidden="true"
+            >
+              <defs>
+                <mask
+                  id="etra-mobile-mask"
+                  x="0"
+                  y="0"
+                  width="800"
+                  height="1600"
+                  maskUnits="userSpaceOnUse"
+                >
+                  <rect
+                    width="800"
+                    height="1600"
+                    fill="white"
+                  />
+
+                  <motion.text
+                    x="400"
+                    y="800"
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    className="intro-mask-text intro-mask-text-mobile"
+                    fill="black"
+                    initial={{ scale: 1 }}
+                    animate={textAnimation}
+                    transition={textTransition}
+                  >
+                    ETRA
+                  </motion.text>
+                </mask>
+              </defs>
+
+              <rect
+                width="800"
+                height="1600"
+                className="intro-mask-background"
+                mask="url(#etra-mobile-mask)"
               />
             </svg>
           </motion.div>
@@ -175,7 +226,7 @@ export default function Intro() {
             }}
             aria-hidden="true"
           >
-            <span>Scroll to explore</span>
+            <span>Scroll to Explore</span>
             <span className="intro-scroll-line" />
           </motion.div>
         )}
