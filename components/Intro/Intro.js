@@ -1,22 +1,27 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 import "./intro.css";
 
+const INTRO_DURATION = 4.8;
+const INTRO_HOLD_DELAY = 700;
+
 export default function Intro() {
+  const [videoReady, setVideoReady] =
+    useState(false);
+
+  const [animationStarted, setAnimationStarted] =
+    useState(false);
+
   const [videoRevealed, setVideoRevealed] =
     useState(false);
 
   const [hasExplored, setHasExplored] =
     useState(false);
 
-  const reduceMotion = useReducedMotion();
-
-  const duration = reduceMotion ? 0.2 : 4.5;
-
-  /* LOCK SCROLL UNTIL AUTOMATIC ZOOM FINISHES */
+  /* LOCK SCROLL UNTIL INTRO COMPLETES */
 
   useEffect(() => {
     document.body.style.overflow = videoRevealed
@@ -28,7 +33,23 @@ export default function Intro() {
     };
   }, [videoRevealed]);
 
-  /* HIDE SCROLL INDICATOR AFTER FIRST SCROLL */
+  /* START ONLY AFTER VIDEO IS READY */
+
+  useEffect(() => {
+    if (!videoReady) {
+      return;
+    }
+
+    const timer = window.setTimeout(() => {
+      setAnimationStarted(true);
+    }, INTRO_HOLD_DELAY);
+
+    return () => {
+      window.clearTimeout(timer);
+    };
+  }, [videoReady]);
+
+  /* HIDE SCROLL HINT AFTER USER SCROLLS */
 
   useEffect(() => {
     if (!videoRevealed) {
@@ -55,9 +76,15 @@ export default function Intro() {
     };
   }, [videoRevealed]);
 
-  /* NOTIFY NAVBAR WHEN VIDEO IS FULLY REVEALED */
+  const handleVideoReady = () => {
+    setVideoReady(true);
+  };
 
   const handleRevealComplete = () => {
+    if (!animationStarted) {
+      return;
+    }
+
     setVideoRevealed(true);
 
     window.dispatchEvent(
@@ -65,13 +92,19 @@ export default function Intro() {
     );
   };
 
-  const textAnimation = {
-    scale: reduceMotion ? 24 : [1, 1, 24],
-  };
+  const maskAnimation = animationStarted
+    ? {
+        scale: [1, 1, 55],
+      }
+    : {
+        scale: 1,
+      };
 
-  const textTransition = {
-    duration,
-    times: [0, 0.2, 1],
+  const maskTransition = {
+    duration: animationStarted
+      ? INTRO_DURATION
+      : 0,
+    times: [0, 0.18, 1],
     ease: [0.76, 0, 0.24, 1],
   };
 
@@ -85,6 +118,8 @@ export default function Intro() {
           loop
           playsInline
           preload="auto"
+          onCanPlay={handleVideoReady}
+          onLoadedData={handleVideoReady}
           aria-label="ETRA Dreams visual effects showreel"
         >
           <source
@@ -99,17 +134,43 @@ export default function Intro() {
           <motion.div
             className="intro-opening"
             initial={{ opacity: 1 }}
-            animate={{ opacity: [1, 1, 0] }}
+            animate={
+              animationStarted
+                ? {
+                    opacity: [1, 1, 0],
+                  }
+                : {
+                    opacity: 1,
+                  }
+            }
             transition={{
-              duration,
-              times: [0, 0.9, 1],
+              duration: animationStarted
+                ? INTRO_DURATION
+                : 0,
+              times: [0, 0.92, 1],
               ease: [0.16, 1, 0.3, 1],
             }}
             onAnimationComplete={
               handleRevealComplete
             }
           >
-            {/* DESKTOP / TABLET MASK */}
+            {/* STATIC ETRA UNTIL VIDEO LOADS */}
+
+            <motion.div
+              className="intro-loading-word"
+              initial={{ opacity: 1 }}
+              animate={{
+                opacity: videoReady ? 0 : 1,
+              }}
+              transition={{
+                duration: 0.25,
+              }}
+              aria-hidden="true"
+            >
+              ETRA
+            </motion.div>
+
+            {/* DESKTOP MASK */}
 
             <svg
               className="intro-mask intro-mask-desktop"
@@ -140,8 +201,8 @@ export default function Intro() {
                     className="intro-mask-text intro-mask-text-desktop"
                     fill="black"
                     initial={{ scale: 1 }}
-                    animate={textAnimation}
-                    transition={textTransition}
+                    animate={maskAnimation}
+                    transition={maskTransition}
                   >
                     ETRA
                   </motion.text>
@@ -187,8 +248,8 @@ export default function Intro() {
                     className="intro-mask-text intro-mask-text-mobile"
                     fill="black"
                     initial={{ scale: 1 }}
-                    animate={textAnimation}
-                    transition={textTransition}
+                    animate={maskAnimation}
+                    transition={maskTransition}
                   >
                     ETRA
                   </motion.text>
@@ -215,10 +276,6 @@ export default function Intro() {
             animate={{
               opacity: 1,
               y: 0,
-            }}
-            exit={{
-              opacity: 0,
-              y: 10,
             }}
             transition={{
               duration: 0.7,
