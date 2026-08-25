@@ -1,0 +1,486 @@
+.clients-section {
+  position: relative;
+
+  width: 100%;
+  overflow: hidden;
+
+  padding-block:
+    clamp(100px, 10vw, 190px)
+    clamp(80px, 8vw, 140px);
+
+  color: var(--text-primary);
+  background: var(--background);
+
+  border-top: 1px solid var(--border);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.clients-header {
+  display: grid;
+  grid-template-columns:
+    minmax(190px, 0.42fr)
+    minmax(0, 1.58fr);
+  align-items: start;
+  gap: clamp(30px, 6vw, 120px);
+
+  margin-bottom: clamp(70px, 8vw, 140px);
+}
+
+.clients-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding-top: clamp(8px, 1vw, 18px);
+
+  color: var(--text-secondary);
+
+  font-size: var(--text-xs);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.clients-section-number {
+  color: var(--etra-pink);
+}
+
+.clients-label-line {
+  width: clamp(28px, 3vw, 58px);
+  height: 1px;
+  flex-shrink: 0;
+
+  background: var(--border);
+}
+
+.clients-heading-group {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.clients-title {
+  max-width: 1250px;
+
+  color: var(--text-primary);
+
+  font-size: clamp(52px, 7vw, 136px);
+  font-weight: 500;
+  line-height: 0.88;
+  letter-spacing: -0.065em;
+}
+
+.clients-title span {
+  display: block;
+  color: var(--etra-pink);
+}
+
+.clients-description {
+  max-width: 620px;
+  margin-top: clamp(30px, 4vw, 58px);
+
+  color: var(--text-secondary);
+
+  font-size: clamp(16px, 1.15vw, 21px);
+  line-height: 1.65;
+}
+
+/* =========================
+   MARQUEE
+========================= */
+
+.clients-marquee {
+  position: relative;
+
+  width: 100%;
+  overflow: hidden;
+
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000000 4%,
+    #000000 96%,
+    transparent 100%
+  );
+
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000000 4%,
+    #000000 96%,
+    transparent 100%
+  );
+}
+
+.clients-marquee-track {
+  width: max-content;
+
+  display: flex;
+  align-items: stretch;
+
+  animation: clients-scroll 34s linear infinite;
+  will-change: transform;
+}
+
+.clients-marquee:hover .clients-marquee-track {
+  animation-play-state: paused;
+}
+
+.clients-logo-group {
+  display: flex;
+  align-items: stretch;
+}
+
+/* =========================
+   LOGO CELL
+========================= */
+
+.client-logo-item {
+  width: clamp(270px, 20vw, 380px);
+  height: clamp(210px, 15vw, 280px);
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: clamp(26px, 2.5vw, 48px);
+
+  border-right: 1px solid var(--border);
+
+  transition: background-color 350ms ease;
+}
+
+/* =========================
+   LOGO CANVAS
+========================= */
+
+.client-logo-canvas {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  padding: clamp(18px, 1.5vw, 28px);
+
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+
+  transition:
+    background-color 350ms ease,
+    border-color 350ms ease,
+    transform 500ms var(--ease-out);
+}
+
+/*
+  Dark mode-la black logos visible aagurathuku
+  uniform light canvas.
+  Image filters apply pannala.
+*/
+
+html[data-theme="dark"] .client-logo-canvas {
+  background: #fffafc;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* =========================
+   LOGO IMAGE
+========================= */
+
+.client-logo-image {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  max-width: 240px;
+  max-height: 130px;
+
+  object-fit: contain;
+  object-position: center;
+
+  opacity: 1;
+  filter: none;
+
+  transition: transform 550ms var(--ease-out);
+}
+
+.client-logo-item:hover {
+  background: var(--surface);
+}
+
+.client-logo-item:hover .client-logo-canvas {
+  transform: translateY(-5px);
+}
+
+.client-logo-item:hover .client-logo-image {
+  transform: scale(1.06);
+}
+
+/* =========================
+   SPECIAL IMAGE ALIGNMENT
+========================= */
+
+/* AMC */
+
+.client-logo-item:has(
+    .client-logo-image[src*="client4.png"]
+  )
+  .client-logo-image {
+  max-width: 230px;
+  max-height: 82px;
+}
+
+/* Netflix */
+
+.client-logo-item:has(
+    .client-logo-image[src*="client6.png"]
+  )
+  .client-logo-image {
+  max-width: 220px;
+  max-height: 85px;
+}
+
+/* TPN */
+
+.client-logo-item:has(
+    .client-logo-image[src*="client7.png"]
+  )
+  .client-logo-image {
+  max-width: 155px;
+  max-height: 155px;
+}
+
+/* Paramount */
+
+.client-logo-item:has(
+    .client-logo-image[src*="client8.png"]
+  )
+  .client-logo-image {
+  max-width: 225px;
+  max-height: 130px;
+}
+
+/* Amazon */
+
+.client-logo-item:has(
+    .client-logo-image[src*="client10.png"]
+  )
+  .client-logo-image {
+  max-width: 220px;
+  max-height: 90px;
+}
+
+/* NBCU */
+
+.client-logo-item:has(
+    .client-logo-image[src*="client12.png"]
+  )
+  .client-logo-image {
+  max-width: 155px;
+  max-height: 155px;
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes clients-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* =========================
+   LARGE SCREEN
+========================= */
+
+@media (min-width: 2200px) {
+  .client-logo-item {
+    width: 420px;
+    height: 300px;
+  }
+
+  .client-logo-image {
+    max-width: 275px;
+    max-height: 155px;
+  }
+
+  .clients-marquee-track {
+    animation-duration: 42s;
+  }
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1024px) {
+  .clients-header {
+    grid-template-columns: 160px minmax(0, 1fr);
+    gap: 34px;
+  }
+
+  .client-logo-item {
+    width: 280px;
+    height: 215px;
+
+    padding: 28px;
+  }
+
+  .client-logo-image {
+    max-width: 205px;
+    max-height: 115px;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .clients-section {
+    padding-block: 90px 75px;
+  }
+
+  .clients-header {
+    display: block;
+
+    margin-bottom: 55px;
+  }
+
+  .clients-label {
+    margin-bottom: 28px;
+    padding-top: 0;
+  }
+
+  .clients-title {
+    font-size: clamp(48px, 14vw, 78px);
+    line-height: 0.9;
+    letter-spacing: -0.055em;
+  }
+
+  .clients-description {
+    margin-top: 28px;
+
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  .clients-marquee {
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      #000000 3%,
+      #000000 97%,
+      transparent 100%
+    );
+
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      #000000 3%,
+      #000000 97%,
+      transparent 100%
+    );
+  }
+
+  .clients-marquee-track {
+    animation-duration: 26s;
+  }
+
+  .client-logo-item {
+    width: 220px;
+    height: 170px;
+
+    padding: 20px;
+  }
+
+  .client-logo-canvas {
+    padding: 18px;
+  }
+
+  .client-logo-image {
+    max-width: 165px;
+    max-height: 95px;
+  }
+
+  .client-logo-item:has(
+      .client-logo-image[src*="client7.png"]
+    )
+    .client-logo-image,
+  .client-logo-item:has(
+      .client-logo-image[src*="client12.png"]
+    )
+    .client-logo-image {
+    max-width: 105px;
+    max-height: 105px;
+  }
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 420px) {
+  .clients-title {
+    font-size: clamp(44px, 13vw, 60px);
+  }
+
+  .client-logo-item {
+    width: 190px;
+    height: 150px;
+
+    padding: 16px;
+  }
+
+  .client-logo-image {
+    max-width: 145px;
+    max-height: 82px;
+  }
+
+  .clients-marquee-track {
+    animation-duration: 24s;
+  }
+}
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .clients-marquee {
+    overflow-x: auto;
+
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .clients-marquee-track {
+    animation: none;
+  }
+
+  .client-logo-canvas,
+  .client-logo-image {
+    transition: none;
+  }
+}

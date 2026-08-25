@@ -1,0 +1,287 @@
+.site-footer {
+  position: relative;
+
+  width: 100%;
+
+  padding-block:
+    clamp(80px, 8vw, 150px)
+    clamp(28px, 3vw, 48px);
+
+  color: var(--text-primary);
+  background: var(--background);
+
+  border-top: 1px solid var(--border);
+}
+
+.footer-inner {
+  position: relative;
+}
+
+/* =========================
+   TOP
+========================= */
+
+.footer-top {
+  display: grid;
+  grid-template-columns:
+    minmax(280px, 1.35fr)
+    minmax(140px, 0.55fr)
+    minmax(190px, 0.75fr)
+    minmax(260px, 1fr);
+  gap: clamp(40px, 5vw, 100px);
+
+  padding-bottom: clamp(70px, 8vw, 140px);
+}
+
+.footer-brand {
+  max-width: 420px;
+}
+
+.footer-logo {
+  position: relative;
+
+  width: clamp(145px, 11vw, 195px);
+
+  display: flex;
+  align-items: center;
+}
+
+.footer-logo-image {
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+}
+
+.footer-logo-light {
+  display: block;
+}
+
+.footer-logo-dark {
+  display: none;
+}
+
+html[data-theme="dark"] .footer-logo-light {
+  display: none;
+}
+
+html[data-theme="dark"] .footer-logo-dark {
+  display: block;
+}
+
+.footer-brand-description {
+  max-width: 360px;
+  margin-top: 30px;
+
+  color: var(--text-secondary);
+
+  font-size: clamp(14px, 0.95vw, 17px);
+  line-height: 1.7;
+}
+
+/* =========================
+   COLUMNS
+========================= */
+
+.footer-column-title {
+  margin-bottom: 26px;
+
+  color: var(--text-secondary);
+
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.footer-links {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.footer-links a {
+  position: relative;
+
+  color: var(--text-primary);
+
+  font-size: clamp(14px, 0.9vw, 17px);
+  line-height: 1.4;
+
+  transition:
+    color 250ms ease,
+    transform 350ms var(--ease-out);
+}
+
+.footer-links a:hover {
+  color: var(--etra-pink);
+  transform: translateX(5px);
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+.footer-email {
+  display: inline-block;
+
+  margin-bottom: 36px;
+
+  color: var(--text-primary);
+
+  font-size: clamp(18px, 1.4vw, 27px);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+
+  overflow-wrap: anywhere;
+
+  transition: color 250ms ease;
+}
+
+.footer-email:hover {
+  color: var(--etra-pink);
+}
+
+.footer-office + .footer-office {
+  margin-top: 22px;
+}
+
+.footer-office span {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: var(--text-secondary);
+
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.footer-office p {
+  color: var(--text-primary);
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* =========================
+   BOTTOM
+========================= */
+
+.footer-bottom {
+  padding-top: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+
+  border-top: 1px solid var(--border);
+}
+
+.footer-bottom p,
+.footer-bottom a {
+  color: var(--text-secondary);
+
+  font-size: clamp(10px, 0.7vw, 12px);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.footer-bottom-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 2vw, 36px);
+}
+
+.footer-bottom-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  transition: color 250ms ease;
+}
+
+.footer-bottom-links a:hover {
+  color: var(--etra-pink);
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1100px) {
+  .footer-top {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 70px;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 640px) {
+  .site-footer {
+    padding-block: 70px 28px;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 55px 24px;
+
+    padding-bottom: 70px;
+  }
+
+  .footer-brand,
+  .footer-contact-column {
+    grid-column: 1 / -1;
+  }
+
+  .footer-brand-description {
+    margin-top: 24px;
+  }
+
+  .footer-column-title {
+    margin-bottom: 20px;
+  }
+
+  .footer-email {
+    margin-bottom: 30px;
+
+    font-size: 20px;
+  }
+
+  .footer-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .footer-bottom-links {
+    width: 100%;
+
+    justify-content: space-between;
+    gap: 14px;
+  }
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 380px) {
+  .footer-top {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-bottom-links {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
