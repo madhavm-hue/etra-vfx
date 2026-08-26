@@ -41,9 +41,33 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [introReady, setIntroReady] = useState(false);
 
-  const [navbarVisible, setNavbarVisible] = useState(
-    pathname !== "/",
-  );
+  const [navbarVisible, setNavbarVisible] =
+    useState(pathname !== "/");
+
+  /* PATH CHANGE */
+
+  useEffect(() => {
+    setMenuOpen(false);
+
+    if (pathname !== "/") {
+      setIntroReady(true);
+      setNavbarVisible(true);
+      return;
+    }
+
+    const introAlreadyCompleted =
+      document.documentElement.getAttribute(
+        "data-etra-intro-complete",
+      ) === "true";
+
+    if (introAlreadyCompleted) {
+      setIntroReady(true);
+      setNavbarVisible(true);
+    } else {
+      setIntroReady(false);
+      setNavbarVisible(false);
+    }
+  }, [pathname]);
 
   /* CLOSE MOBILE MENU WITH ESCAPE */
 
@@ -54,7 +78,10 @@ export default function Navbar() {
       }
     };
 
-    document.addEventListener("keydown", handleEscape);
+    document.addEventListener(
+      "keydown",
+      handleEscape,
+    );
 
     return () => {
       document.removeEventListener(
@@ -82,15 +109,19 @@ export default function Navbar() {
     };
   }, [menuOpen]);
 
-  /* WAIT UNTIL AUTOMATIC ETRA ZOOM FINISHES */
+  /* WAIT FOR ETRA INTRO */
 
   useEffect(() => {
     if (pathname !== "/") {
       return;
     }
 
-    const handleIntroReady = () => {
+    const handleIntroReady = (event) => {
       setIntroReady(true);
+
+      if (event.detail?.skipped) {
+        setNavbarVisible(true);
+      }
     };
 
     window.addEventListener(
@@ -106,10 +137,14 @@ export default function Navbar() {
     };
   }, [pathname]);
 
-  /* SHOW NAVBAR AFTER FIRST LIGHT SCROLL */
+  /* FIRST SCROLL AFTER INTRO */
 
   useEffect(() => {
-    if (pathname !== "/" || !introReady) {
+    if (
+      pathname !== "/" ||
+      !introReady ||
+      navbarVisible
+    ) {
       return;
     }
 
@@ -119,10 +154,14 @@ export default function Navbar() {
       }
     };
 
+    handleFirstScroll();
+
     window.addEventListener(
       "scroll",
       handleFirstScroll,
-      { passive: true },
+      {
+        passive: true,
+      },
     );
 
     return () => {
@@ -131,7 +170,11 @@ export default function Navbar() {
         handleFirstScroll,
       );
     };
-  }, [pathname, introReady]);
+  }, [
+    pathname,
+    introReady,
+    navbarVisible,
+  ]);
 
   const isActiveLink = (href) => {
     if (href === "/") {
@@ -149,13 +192,19 @@ export default function Navbar() {
   };
 
   const toggleMenu = () => {
-    setMenuOpen((currentState) => !currentState);
+    setMenuOpen(
+      (currentState) => !currentState,
+    );
   };
 
   const headerClasses = [
     "site-header",
-    pathname === "/" ? "home-intro-header" : "",
-    navbarVisible ? "navbar-visible" : "",
+    pathname === "/"
+      ? "home-intro-header"
+      : "",
+    navbarVisible
+      ? "navbar-visible"
+      : "",
     menuOpen ? "menu-open" : "",
   ]
     .filter(Boolean)
@@ -195,7 +244,8 @@ export default function Navbar() {
           aria-label="Main navigation"
         >
           {navLinks.map((item) => {
-            const active = isActiveLink(item.href);
+            const active =
+              isActiveLink(item.href);
 
             return (
               <Link
@@ -205,7 +255,9 @@ export default function Navbar() {
                   active ? "active" : ""
                 }`}
                 aria-current={
-                  active ? "page" : undefined
+                  active
+                    ? "page"
+                    : undefined
                 }
               >
                 {item.label}
@@ -245,7 +297,8 @@ export default function Navbar() {
           aria-label="Mobile navigation"
         >
           {navLinks.map((item, index) => {
-            const active = isActiveLink(item.href);
+            const active =
+              isActiveLink(item.href);
 
             return (
               <Link
@@ -256,7 +309,9 @@ export default function Navbar() {
                   active ? "active" : ""
                 }`}
                 aria-current={
-                  active ? "page" : undefined
+                  active
+                    ? "page"
+                    : undefined
                 }
               >
                 <span className="mobile-menu-number">

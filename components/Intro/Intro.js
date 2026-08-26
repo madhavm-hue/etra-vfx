@@ -8,22 +8,65 @@ import "./intro.css";
 const INTRO_DURATION = 4.8;
 const INTRO_HOLD_DELAY = 700;
 
+/*
+  Browser refresh panna indha value false-ah reset aagum.
+
+  Same browser load-la Services/Portfolio poi Home return
+  pannina true-ah retain aagum. Adhanala intro repeat aagadhu.
+*/
+let introHasPlayedDuringThisLoad = false;
+
 export default function Intro() {
-  const [videoReady, setVideoReady] =
-    useState(false);
+  const skipIntro = introHasPlayedDuringThisLoad;
+
+  const [videoReady, setVideoReady] = useState(skipIntro);
 
   const [animationStarted, setAnimationStarted] =
-    useState(false);
+    useState(skipIntro);
 
   const [videoRevealed, setVideoRevealed] =
-    useState(false);
+    useState(skipIntro);
 
   const [hasExplored, setHasExplored] =
-    useState(false);
+    useState(skipIntro);
 
-  /* LOCK SCROLL UNTIL INTRO COMPLETES */
+  /* HOME RETURN — INTRO SKIP */
 
   useEffect(() => {
+    if (!skipIntro) {
+      return;
+    }
+
+    document.body.style.overflow = "";
+
+    document.documentElement.setAttribute(
+      "data-etra-intro-complete",
+      "true",
+    );
+
+    const frame = window.requestAnimationFrame(() => {
+      window.dispatchEvent(
+        new CustomEvent("etra:intro-ready", {
+          detail: {
+            skipped: true,
+          },
+        }),
+      );
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+    };
+  }, [skipIntro]);
+
+  /* LOCK SCROLL UNTIL FIRST INTRO COMPLETES */
+
+  useEffect(() => {
+    if (skipIntro) {
+      document.body.style.overflow = "";
+      return;
+    }
+
     document.body.style.overflow = videoRevealed
       ? ""
       : "hidden";
@@ -31,12 +74,12 @@ export default function Intro() {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [videoRevealed]);
+  }, [skipIntro, videoRevealed]);
 
-  /* START ONLY AFTER VIDEO IS READY */
+  /* START INTRO AFTER VIDEO IS READY */
 
   useEffect(() => {
-    if (!videoReady) {
+    if (skipIntro || !videoReady) {
       return;
     }
 
@@ -47,12 +90,12 @@ export default function Intro() {
     return () => {
       window.clearTimeout(timer);
     };
-  }, [videoReady]);
+  }, [skipIntro, videoReady]);
 
   /* HIDE SCROLL HINT AFTER USER SCROLLS */
 
   useEffect(() => {
-    if (!videoRevealed) {
+    if (skipIntro || !videoRevealed) {
       return;
     }
 
@@ -62,10 +105,14 @@ export default function Intro() {
       }
     };
 
+    handleExploreScroll();
+
     window.addEventListener(
       "scroll",
       handleExploreScroll,
-      { passive: true },
+      {
+        passive: true,
+      },
     );
 
     return () => {
@@ -74,21 +121,34 @@ export default function Intro() {
         handleExploreScroll,
       );
     };
-  }, [videoRevealed]);
+  }, [skipIntro, videoRevealed]);
 
   const handleVideoReady = () => {
-    setVideoReady(true);
+    if (!videoReady) {
+      setVideoReady(true);
+    }
   };
 
   const handleRevealComplete = () => {
-    if (!animationStarted) {
+    if (!animationStarted || skipIntro) {
       return;
     }
+
+    introHasPlayedDuringThisLoad = true;
+
+    document.documentElement.setAttribute(
+      "data-etra-intro-complete",
+      "true",
+    );
 
     setVideoRevealed(true);
 
     window.dispatchEvent(
-      new CustomEvent("etra:intro-ready"),
+      new CustomEvent("etra:intro-ready", {
+        detail: {
+          skipped: false,
+        },
+      }),
     );
   };
 
@@ -104,12 +164,17 @@ export default function Intro() {
     duration: animationStarted
       ? INTRO_DURATION
       : 0,
+
     times: [0, 0.18, 1],
     ease: [0.76, 0, 0.24, 1],
   };
 
   return (
-    <section className="intro-section">
+    <section
+      className={`intro-section ${
+        skipIntro ? "intro-section-skipped" : ""
+      }`}
+    >
       <div className="intro-stage">
         <video
           className="intro-video"
@@ -117,7 +182,7 @@ export default function Intro() {
           muted
           loop
           playsInline
-          preload="auto"
+          preload={skipIntro ? "metadata" : "auto"}
           onCanPlay={handleVideoReady}
           onLoadedData={handleVideoReady}
           aria-label="ETRA Dreams visual effects showreel"
@@ -130,10 +195,12 @@ export default function Intro() {
 
         <div className="intro-video-overlay" />
 
-        {!videoRevealed && (
+        {!skipIntro && !videoRevealed && (
           <motion.div
             className="intro-opening"
-            initial={{ opacity: 1 }}
+            initial={{
+              opacity: 1,
+            }}
             animate={
               animationStarted
                 ? {
@@ -147,6 +214,7 @@ export default function Intro() {
               duration: animationStarted
                 ? INTRO_DURATION
                 : 0,
+
               times: [0, 0.92, 1],
               ease: [0.16, 1, 0.3, 1],
             }}
@@ -154,11 +222,11 @@ export default function Intro() {
               handleRevealComplete
             }
           >
-            {/* STATIC ETRA UNTIL VIDEO LOADS */}
-
             <motion.div
               className="intro-loading-word"
-              initial={{ opacity: 1 }}
+              initial={{
+                opacity: 1,
+              }}
               animate={{
                 opacity: videoReady ? 0 : 1,
               }}
@@ -200,7 +268,9 @@ export default function Intro() {
                     dominantBaseline="middle"
                     className="intro-mask-text intro-mask-text-desktop"
                     fill="black"
-                    initial={{ scale: 1 }}
+                    initial={{
+                      scale: 1,
+                    }}
                     animate={maskAnimation}
                     transition={maskTransition}
                   >
@@ -217,7 +287,7 @@ export default function Intro() {
               />
             </svg>
 
-            {/* MOBILE PORTRAIT MASK */}
+            {/* MOBILE MASK */}
 
             <svg
               className="intro-mask intro-mask-mobile"
@@ -247,7 +317,9 @@ export default function Intro() {
                     dominantBaseline="middle"
                     className="intro-mask-text intro-mask-text-mobile"
                     fill="black"
-                    initial={{ scale: 1 }}
+                    initial={{
+                      scale: 1,
+                    }}
                     animate={maskAnimation}
                     transition={maskTransition}
                   >
@@ -266,27 +338,30 @@ export default function Intro() {
           </motion.div>
         )}
 
-        {videoRevealed && !hasExplored && (
-          <motion.div
-            className="intro-scroll-hint"
-            initial={{
-              opacity: 0,
-              y: 12,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              duration: 0.7,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-            aria-hidden="true"
-          >
-            <span>Scroll to Explore</span>
-            <span className="intro-scroll-line" />
-          </motion.div>
-        )}
+        {!skipIntro &&
+          videoRevealed &&
+          !hasExplored && (
+            <motion.div
+              className="intro-scroll-hint"
+              initial={{
+                opacity: 0,
+                y: 12,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                duration: 0.7,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              aria-hidden="true"
+            >
+              <span>Scroll to Explore</span>
+
+              <span className="intro-scroll-line" />
+            </motion.div>
+          )}
       </div>
     </section>
   );
