@@ -1,0 +1,8 @@
+.services-page {
+  width: 100%;
+  min-height: 100vh;
+
+  overflow: clip;
+
+  background: var(--background);
+}
