@@ -73,28 +73,30 @@
 
 /* LIGHT THEME — SUN */
 
+/* LIGHT THEME — SHOW MOON */
+
 .theme-toggle-sun {
-  opacity: 1;
-  transform: rotate(0deg) scale(1);
-}
-
-.theme-toggle-moon {
-  opacity: 0;
-  transform: rotate(-80deg) scale(0.6);
-}
-
-/* DARK THEME — MOON */
-
-html[data-theme="dark"]
-  .theme-toggle-sun {
   opacity: 0;
   transform: rotate(80deg) scale(0.6);
 }
 
-html[data-theme="dark"]
-  .theme-toggle-moon {
+.theme-toggle-moon {
   opacity: 1;
   transform: rotate(0deg) scale(1);
+}
+
+/* DARK THEME — SHOW SUN */
+
+html[data-theme="dark"]
+  .theme-toggle-sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+html[data-theme="dark"]
+  .theme-toggle-moon {
+  opacity: 0;
+  transform: rotate(-80deg) scale(0.6);
 }
 
 .theme-toggle:focus-visible {

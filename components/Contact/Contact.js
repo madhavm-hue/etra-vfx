@@ -8,13 +8,11 @@ import "./contact.css";
 const reveal = {
   hidden: {
     opacity: 0,
-    y: 60,
+    y: 55,
   },
-
   visible: {
     opacity: 1,
     y: 0,
-
     transition: {
       duration: 0.9,
       ease: [0.16, 1, 0.3, 1],
@@ -24,8 +22,11 @@ const reveal = {
 
 export default function Contact() {
   const handlePointerMove = (event) => {
-    const section = event.currentTarget;
-    const bounds = section.getBoundingClientRect();
+    const section =
+      event.currentTarget;
+
+    const bounds =
+      section.getBoundingClientRect();
 
     section.style.setProperty(
       "--contact-pointer-x",
@@ -38,11 +39,33 @@ export default function Contact() {
     );
   };
 
+  const handlePointerLeave = (
+    event,
+  ) => {
+    const section =
+      event.currentTarget;
+
+    section.style.setProperty(
+      "--contact-pointer-x",
+      "50%",
+    );
+
+    section.style.setProperty(
+      "--contact-pointer-y",
+      "50%",
+    );
+  };
+
   return (
     <section
       className="home-contact"
       aria-labelledby="home-contact-title"
-      onPointerMove={handlePointerMove}
+      onPointerMove={
+        handlePointerMove
+      }
+      onPointerLeave={
+        handlePointerLeave
+      }
     >
       <div
         className="home-contact-glow"
@@ -89,13 +112,16 @@ export default function Contact() {
 
             <div className="home-contact-bottom">
               <p>
-                Have a project in mind? Let&apos;s
-                bring your vision to life through
-                world-class visual effects.
+                Have a project in mind?
+                Let&apos;s bring your vision
+                to life through world-class
+                visual effects.
               </p>
 
               <span className="home-contact-action">
-                <span>Get in touch</span>
+                <span>
+                  Get in touch
+                </span>
 
                 <span className="home-contact-action-line" />
               </span>
