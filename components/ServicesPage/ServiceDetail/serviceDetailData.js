@@ -4,10 +4,12 @@ export const serviceDetails = [
     _type: "service",
 
     slug: {
-      current: "rotoscopy-keying-matte-extraction",
+      current:
+        "rotoscopy-keying-matte-extraction",
     },
 
-    title: "Rotoscopy - Keying / Matte extraction",
+    title:
+      "Rotoscopy - Keying / Matte extraction",
 
     introduction:
       "Expert rotoscoping and keying for precise mattes, seamless compositing, and flawless VFX integration, handling intricate details and challenging conditions.",
@@ -90,14 +92,15 @@ export const serviceDetails = [
     title: "Paint - Prep",
 
     introduction:
-      "Paint Prep removes distractions like wires & scratches, reconstructs missing elements, and ensures scenes match the director's vision using advanced tools.",
+      "Paint Prep removes distractions like wires and scratches, reconstructs missing elements, and ensures scenes match the director's vision using advanced tools.",
 
     heroMedia: {
       src: "/images/services/paint-prep.gif",
       alt: "Paint and prep visual effects preview",
     },
 
-    sectionTitle: "Restoring and Enhancing Every Frame",
+    sectionTitle:
+      "Restoring and Enhancing Every Frame",
 
     paragraphs: [
       "The Paint Prep department is where unwanted distractions are removed, and perfection is restored. Our skilled artists ensure that everything from wires, rigs, and camera reflections to set blemishes and scratches disappears as though they were never there.",
@@ -129,10 +132,12 @@ export const serviceDetails = [
     ],
 
     relatedService: {
-      title: "Rotoscopy - Keying / Matte extraction",
+      title:
+        "Rotoscopy - Keying / Matte extraction",
 
       slug: {
-        current: "rotoscopy-keying-matte-extraction",
+        current:
+          "rotoscopy-keying-matte-extraction",
       },
 
       image: {
@@ -169,14 +174,15 @@ export const serviceDetails = [
     title: "Match-move / Rotomation",
 
     introduction:
-      "Seamlessly integrate CGI into live-action with expert camera/object tracking, scene layouts, and tools like 3DEqualizer, PFTrack, and Maya.",
+      "Seamlessly integrate CGI into live-action with expert camera and object tracking, scene layouts, and tools like 3DEqualizer, PFTrack, and Maya.",
 
     heroMedia: {
       src: "/images/services/matchmove.gif",
       alt: "Match-move and rotomation visual effects preview",
     },
 
-    sectionTitle: "Aligning the Virtual with Reality",
+    sectionTitle:
+      "Aligning the Virtual with Reality",
 
     paragraphs: [
       "Matchmove is the art of integrating the digital world with the physical. Our team meticulously analyzes camera movements, lens distortion, and on-set dynamics to recreate them digitally. This ensures that CGI elements align perfectly with the real-world footage, maintaining realism in every frame.",
@@ -208,10 +214,12 @@ export const serviceDetails = [
     ],
 
     relatedService: {
-      title: "Rotoscopy - Keying / Matte extraction",
+      title:
+        "Rotoscopy - Keying / Matte extraction",
 
       slug: {
-        current: "rotoscopy-keying-matte-extraction",
+        current:
+          "rotoscopy-keying-matte-extraction",
       },
 
       image: {
@@ -242,10 +250,12 @@ export const serviceDetails = [
     _type: "service",
 
     slug: {
-      current: "compositing-cgi-integration",
+      current:
+        "compositing-cgi-integration",
     },
 
-    title: "Compositing / CGI integration",
+    title:
+      "Compositing / CGI integration",
 
     introduction:
       "We craft seamless visuals by integrating CGI, live-action, and matte paintings with expertise in photorealism, color grading, and advanced VFX tools.",
@@ -255,7 +265,8 @@ export const serviceDetails = [
       alt: "Compositing and CGI integration preview",
     },
 
-    sectionTitle: "Bringing Elements Together Flawlessly",
+    sectionTitle:
+      "Bringing Elements Together Flawlessly",
 
     paragraphs: [
       "Compositing is where magic happens. Our team combines live-action footage, CGI, matte paintings, and other VFX elements to create the final visual masterpiece. Every shot is meticulously crafted to ensure that lighting, color grading, and perspective match perfectly, creating a seamless and immersive experience.",
@@ -319,6 +330,7 @@ export const serviceDetails = [
 
 export function getServiceDetailBySlug(slug) {
   return serviceDetails.find(
-    (service) => service.slug.current === slug,
+    (service) =>
+      service.slug.current === slug,
   );
 }

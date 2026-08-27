@@ -4,9 +4,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
+import {
+  serviceDetails,
+} from "./serviceDetailData";
+
 import "./service-detail.css";
 
-const revealEase = [0.16, 1, 0.3, 1];
+const revealEase = [
+  0.16,
+  1,
+  0.3,
+  1,
+];
 
 const reveal = {
   hidden: {
@@ -25,9 +34,35 @@ const reveal = {
   },
 };
 
-export default function ServiceDetail({ service }) {
+export default function ServiceDetail({
+  service,
+}) {
+  const otherServices =
+    serviceDetails.filter(
+      (item) =>
+        item.slug.current !==
+        service.slug.current,
+    );
+
+  const getServiceNumber = (
+    serviceSlug,
+  ) => {
+    const serviceIndex =
+      serviceDetails.findIndex(
+        (item) =>
+          item.slug.current ===
+          serviceSlug,
+      );
+
+    return String(
+      serviceIndex + 1,
+    ).padStart(2, "0");
+  };
+
   return (
     <article className="service-detail">
+      {/* HERO */}
+
       <section
         className="service-detail-hero"
         aria-labelledby="service-detail-title"
@@ -70,7 +105,10 @@ export default function ServiceDetail({ service }) {
               href="/services"
               className="service-detail-back"
             >
-              <span aria-hidden="true">←</span>
+              <span aria-hidden="true">
+                ←
+              </span>
+
               <span>All services</span>
             </Link>
 
@@ -100,11 +138,16 @@ export default function ServiceDetail({ service }) {
             }}
             aria-hidden="true"
           >
-            <span>Scroll to explore</span>
+            <span>
+              Scroll to explore
+            </span>
+
             <span className="service-detail-scroll-line" />
           </motion.div>
         </div>
       </section>
+
+      {/* STORY */}
 
       <section className="service-detail-story">
         <div className="site-container service-detail-story-grid">
@@ -124,8 +167,13 @@ export default function ServiceDetail({ service }) {
 
             <div className="service-detail-paragraphs">
               {service.paragraphs.map(
-                (paragraph, index) => (
-                  <p key={`${service._id}-paragraph-${index}`}>
+                (
+                  paragraph,
+                  index,
+                ) => (
+                  <p
+                    key={`${service._id}-paragraph-${index}`}
+                  >
                     {paragraph}
                   </p>
                 ),
@@ -153,10 +201,18 @@ export default function ServiceDetail({ service }) {
             }}
           >
             <Image
-              src={service.featureMedia.src}
-              alt={service.featureMedia.alt}
+              src={
+                service.featureMedia.src
+              }
+              alt={
+                service.featureMedia.alt
+              }
               fill
-              sizes="(max-width: 768px) 100vw, 48vw"
+              sizes="
+                (max-width: 768px)
+                100vw,
+                48vw
+              "
               className="service-detail-feature-image"
             />
 
@@ -167,6 +223,8 @@ export default function ServiceDetail({ service }) {
           </motion.div>
         </div>
       </section>
+
+      {/* HIGHLIGHTS */}
 
       <section className="service-detail-highlights">
         <div className="site-container">
@@ -185,7 +243,10 @@ export default function ServiceDetail({ service }) {
 
           <div className="service-detail-highlight-grid">
             {service.highlights.map(
-              (highlight, index) => (
+              (
+                highlight,
+                index,
+              ) => (
                 <motion.div
                   key={highlight._key}
                   className="service-detail-highlight-card"
@@ -203,15 +264,20 @@ export default function ServiceDetail({ service }) {
                   }}
                   transition={{
                     duration: 0.85,
-                    delay: index * 0.1,
+                    delay:
+                      index * 0.1,
                     ease: revealEase,
                   }}
                 >
                   <span className="service-detail-highlight-number">
-                    {highlight.number}
+                    {
+                      highlight.number
+                    }
                   </span>
 
-                  <p>{highlight.text}</p>
+                  <p>
+                    {highlight.text}
+                  </p>
                 </motion.div>
               ),
             )}
@@ -219,52 +285,160 @@ export default function ServiceDetail({ service }) {
         </div>
       </section>
 
-      <section className="service-detail-next">
-        <Link
-          href={`/services/${service.relatedService.slug.current}`}
-          className="service-detail-next-link"
-          aria-label={`View ${service.relatedService.title} service`}
-        >
-          <Image
-            src={service.relatedService.image.src}
-            alt={service.relatedService.image.alt}
-            fill
-            sizes="100vw"
-            className="service-detail-next-image service-detail-next-static"
-          />
+      {/* OTHER SERVICES */}
 
-          <Image
-            src={service.relatedService.preview.src}
-            alt=""
-            fill
-            unoptimized
-            aria-hidden="true"
-            sizes="100vw"
-            className="service-detail-next-image service-detail-next-preview"
-          />
+      <section className="service-detail-other-services">
+        <div className="site-container">
+          <motion.div
+            className="service-detail-other-header"
+            variants={reveal}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{
+              once: true,
+              amount: 0.3,
+            }}
+          >
+            <p className="service-detail-other-label">
+              Continue exploring
+            </p>
 
-          <div
-            className="service-detail-next-overlay"
-            aria-hidden="true"
-          />
+            <h2 className="service-detail-other-title">
+              Discover our
+              <span>
+                other services.
+              </span>
+            </h2>
+          </motion.div>
 
-          <div className="site-container service-detail-next-content">
-            <span>Next service</span>
+          <div className="service-detail-other-grid">
+            {otherServices.map(
+              (
+                otherService,
+                index,
+              ) => (
+                <motion.article
+                  key={
+                    otherService.slug
+                      .current
+                  }
+                  className="service-detail-other-card"
+                  initial={{
+                    opacity: 0,
+                    y: 55,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  viewport={{
+                    once: true,
+                    amount: 0.15,
+                  }}
+                  transition={{
+                    duration: 0.85,
+                    delay:
+                      Math.min(
+                        index * 0.1,
+                        0.2,
+                      ),
+                    ease: revealEase,
+                  }}
+                >
+                  <Link
+                    href={`/services/${otherService.slug.current}`}
+                    className="service-detail-other-link"
+                    aria-label={`View ${otherService.title} service`}
+                  >
+                    <div className="service-detail-other-media">
+                      <Image
+                        src={
+                          otherService
+                            .featureMedia
+                            .src
+                        }
+                        alt={
+                          otherService
+                            .featureMedia
+                            .alt
+                        }
+                        fill
+                        sizes="
+                          (max-width: 768px)
+                          100vw,
+                          33vw
+                        "
+                        className="
+                          service-detail-other-image
+                          service-detail-other-static
+                        "
+                      />
 
-            <h2>{service.relatedService.title}</h2>
+                      <Image
+                        src={
+                          otherService
+                            .heroMedia
+                            .src
+                        }
+                        alt=""
+                        fill
+                        unoptimized
+                        aria-hidden="true"
+                        sizes="
+                          (max-width: 768px)
+                          100vw,
+                          33vw
+                        "
+                        className="
+                          service-detail-other-image
+                          service-detail-other-preview
+                        "
+                      />
 
-            <span
-              className="service-detail-next-arrow"
-              aria-hidden="true"
-            >
-              <svg viewBox="0 0 24 24">
-                <path d="M5 12H19" />
-                <path d="M13 6L19 12L13 18" />
-              </svg>
-            </span>
+                      <div
+                        className="service-detail-other-overlay"
+                        aria-hidden="true"
+                      />
+
+                      <div className="service-detail-other-top">
+                        <span>
+                          {getServiceNumber(
+                            otherService
+                              .slug
+                              .current,
+                          )}
+                        </span>
+
+                        <span
+                          className="service-detail-other-arrow"
+                          aria-hidden="true"
+                        >
+                          <svg viewBox="0 0 24 24">
+                            <path d="M5 19L19 5" />
+                            <path d="M9 5H19V15" />
+                          </svg>
+                        </span>
+                      </div>
+
+                      <div className="service-detail-other-content">
+                        <p>Service</p>
+
+                        <h3>
+                          {
+                            otherService.title
+                          }
+                        </h3>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.article>
+              ),
+            )}
           </div>
-        </Link>
+        </div>
       </section>
+
+      {/* RELATED PORTFOLIO */}
 
       <section className="service-detail-portfolio">
         <div className="site-container">
@@ -292,20 +466,40 @@ export default function ServiceDetail({ service }) {
             }}
           >
             <Link
-              href={service.relatedPortfolio.href}
+              href={
+                service
+                  .relatedPortfolio
+                  .href
+              }
               className="service-detail-portfolio-card"
               aria-label={`View ${service.relatedPortfolio.title} in portfolio`}
             >
               <div className="service-detail-portfolio-media">
-               <Image
-  key={service.relatedPortfolio.image.src}
-  src={service.relatedPortfolio.image.src}
-  alt={service.relatedPortfolio.image.alt}
-  fill
-  unoptimized
-  sizes="(max-width: 640px) 82vw, 430px"
-  className="service-detail-portfolio-image"
-/>
+                <Image
+                  key={
+                    service
+                      .relatedPortfolio
+                      .image.src
+                  }
+                  src={
+                    service
+                      .relatedPortfolio
+                      .image.src
+                  }
+                  alt={
+                    service
+                      .relatedPortfolio
+                      .image.alt
+                  }
+                  fill
+                  unoptimized
+                  sizes="
+                    (max-width: 640px)
+                    82vw,
+                    430px
+                  "
+                  className="service-detail-portfolio-image"
+                />
 
                 <div
                   className="service-detail-portfolio-overlay"
@@ -323,16 +517,26 @@ export default function ServiceDetail({ service }) {
                 </span>
               </div>
 
-              <h3>{service.relatedPortfolio.title}</h3>
+              <h3>
+                {
+                  service
+                    .relatedPortfolio
+                    .title
+                }
+              </h3>
             </Link>
 
             <Link
               href="/portfolio"
               className="service-detail-portfolio-button"
             >
-              <span>View All Portfolio</span>
+              <span>
+                View All Portfolio
+              </span>
 
-              <span aria-hidden="true">→</span>
+              <span aria-hidden="true">
+                →
+              </span>
             </Link>
           </motion.div>
         </div>
