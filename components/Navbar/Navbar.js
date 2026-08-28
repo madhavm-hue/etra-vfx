@@ -38,38 +38,53 @@ const navLinks = [
 export default function Navbar() {
   const pathname = usePathname();
 
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [introReady, setIntroReady] = useState(false);
+  const [menuOpen, setMenuOpen] =
+    useState(false);
+
+  const [introReady, setIntroReady] =
+    useState(false);
 
   const [navbarVisible, setNavbarVisible] =
     useState(pathname !== "/");
 
-  /* PATH CHANGE */
+  /* =========================
+     HANDLE ROUTE CHANGE
+  ========================= */
 
   useEffect(() => {
-    setMenuOpen(false);
+    const frame =
+      window.requestAnimationFrame(() => {
+        setMenuOpen(false);
 
-    if (pathname !== "/") {
-      setIntroReady(true);
-      setNavbarVisible(true);
-      return;
-    }
+        if (pathname !== "/") {
+          setIntroReady(true);
+          setNavbarVisible(true);
+          return;
+        }
 
-    const introAlreadyCompleted =
-      document.documentElement.getAttribute(
-        "data-etra-intro-complete",
-      ) === "true";
+        const introAlreadyCompleted =
+          document.documentElement.getAttribute(
+            "data-etra-intro-complete",
+          ) === "true";
 
-    if (introAlreadyCompleted) {
-      setIntroReady(true);
-      setNavbarVisible(true);
-    } else {
-      setIntroReady(false);
-      setNavbarVisible(false);
-    }
+        setIntroReady(
+          introAlreadyCompleted,
+        );
+
+        setNavbarVisible(
+          introAlreadyCompleted,
+        );
+      });
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+    };
   }, [pathname]);
 
-  /* CLOSE MOBILE MENU WITH ESCAPE */
+  /* =========================
+     CLOSE MOBILE MENU
+     WHEN ESCAPE IS PRESSED
+  ========================= */
 
   useEffect(() => {
     const handleEscape = (event) => {
@@ -91,11 +106,13 @@ export default function Navbar() {
     };
   }, []);
 
-  /* MOBILE MENU SCROLL LOCK */
+  /* =========================
+     MOBILE MENU SCROLL LOCK
+  ========================= */
 
   useEffect(() => {
     if (!menuOpen) {
-      return;
+      return undefined;
     }
 
     const previousOverflow =
@@ -109,11 +126,13 @@ export default function Navbar() {
     };
   }, [menuOpen]);
 
-  /* WAIT FOR ETRA INTRO */
+  /* =========================
+     WAIT FOR HOME INTRO
+  ========================= */
 
   useEffect(() => {
     if (pathname !== "/") {
-      return;
+      return undefined;
     }
 
     const handleIntroReady = (event) => {
@@ -137,7 +156,10 @@ export default function Navbar() {
     };
   }, [pathname]);
 
-  /* FIRST SCROLL AFTER INTRO */
+  /* =========================
+     SHOW NAVBAR AFTER
+     FIRST LIGHT SCROLL
+  ========================= */
 
   useEffect(() => {
     if (
@@ -145,7 +167,7 @@ export default function Navbar() {
       !introReady ||
       navbarVisible
     ) {
-      return;
+      return undefined;
     }
 
     const handleFirstScroll = () => {
@@ -154,7 +176,10 @@ export default function Navbar() {
       }
     };
 
-    handleFirstScroll();
+    const frame =
+      window.requestAnimationFrame(
+        handleFirstScroll,
+      );
 
     window.addEventListener(
       "scroll",
@@ -165,6 +190,8 @@ export default function Navbar() {
     );
 
     return () => {
+      window.cancelAnimationFrame(frame);
+
       window.removeEventListener(
         "scroll",
         handleFirstScroll,
@@ -175,6 +202,10 @@ export default function Navbar() {
     introReady,
     navbarVisible,
   ]);
+
+  /* =========================
+     ACTIVE LINK CHECK
+  ========================= */
 
   const isActiveLink = (href) => {
     if (href === "/") {
@@ -187,6 +218,10 @@ export default function Navbar() {
     );
   };
 
+  /* =========================
+     MENU FUNCTIONS
+  ========================= */
+
   const closeMenu = () => {
     setMenuOpen(false);
   };
@@ -197,15 +232,24 @@ export default function Navbar() {
     );
   };
 
+  /* =========================
+     HEADER CLASSES
+  ========================= */
+
   const headerClasses = [
     "site-header",
+
     pathname === "/"
       ? "home-intro-header"
       : "",
+
     navbarVisible
       ? "navbar-visible"
       : "",
-    menuOpen ? "menu-open" : "",
+
+    menuOpen
+      ? "menu-open"
+      : "",
   ]
     .filter(Boolean)
     .join(" ");
@@ -213,6 +257,8 @@ export default function Navbar() {
   return (
     <header className={headerClasses}>
       <div className="site-container navbar-inner">
+        {/* LOGO */}
+
         <Link
           href="/"
           className="navbar-logo"
@@ -238,6 +284,8 @@ export default function Navbar() {
             className="logo logo-dark"
           />
         </Link>
+
+        {/* DESKTOP NAVIGATION */}
 
         <nav
           className="navbar-nav"
@@ -266,6 +314,8 @@ export default function Navbar() {
           })}
         </nav>
 
+        {/* NAVBAR ACTIONS */}
+
         <div className="navbar-actions">
           <ThemeToggle />
 
@@ -287,6 +337,8 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* MOBILE MENU */}
+
       <div
         id="mobile-navigation"
         className="mobile-menu"
@@ -296,35 +348,38 @@ export default function Navbar() {
           className="site-container mobile-menu-nav"
           aria-label="Mobile navigation"
         >
-          {navLinks.map((item, index) => {
-            const active =
-              isActiveLink(item.href);
+          {navLinks.map(
+            (item, index) => {
+              const active =
+                isActiveLink(item.href);
 
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={closeMenu}
-                className={`mobile-menu-link ${
-                  active ? "active" : ""
-                }`}
-                aria-current={
-                  active
-                    ? "page"
-                    : undefined
-                }
-              >
-                <span className="mobile-menu-number">
-                  {String(index + 1).padStart(
-                    2,
-                    "0",
-                  )}
-                </span>
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={closeMenu}
+                  className={`mobile-menu-link ${
+                    active ? "active" : ""
+                  }`}
+                  aria-current={
+                    active
+                      ? "page"
+                      : undefined
+                  }
+                >
+                  <span className="mobile-menu-number">
+                    {String(
+                      index + 1,
+                    ).padStart(2, "0")}
+                  </span>
 
-                <span>{item.label}</span>
-              </Link>
-            );
-          })}
+                  <span>
+                    {item.label}
+                  </span>
+                </Link>
+              );
+            },
+          )}
         </nav>
       </div>
     </header>
