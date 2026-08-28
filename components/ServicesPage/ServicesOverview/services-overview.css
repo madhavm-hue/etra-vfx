@@ -1,7 +1,6 @@
 .services-list-section {
   width: 100%;
   padding-block: var(--section-space);
-
   overflow: hidden;
 
   color: var(--text-primary);
@@ -10,10 +9,59 @@
   scroll-margin-top: 88px;
 }
 
+.services-list-header {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.35fr)
+    minmax(260px, 0.65fr);
+  align-items: end;
+  gap: clamp(40px, 7vw, 130px);
+
+  margin-bottom: clamp(75px, 9vw, 150px);
+}
+
+.services-list-eyebrow {
+  margin-bottom: 24px;
+
+  color: var(--etra-pink);
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.services-list-header h2 {
+  max-width: 1100px;
+
+  font-size: clamp(54px, 7vw, 130px);
+  font-weight: 500;
+  line-height: 0.88;
+  letter-spacing: -0.065em;
+}
+
+.services-list-header h2 span {
+  display: block;
+  color: var(--etra-pink);
+}
+
+.services-list-header > p {
+  max-width: 480px;
+
+  color: var(--text-secondary);
+
+  font-size: clamp(15px, 1vw, 18px);
+  line-height: 1.7;
+}
+
 .services-list-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(24px, 3vw, 55px);
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap:
+    clamp(70px, 9vw, 150px)
+    clamp(24px, 3vw, 55px);
 }
 
 .services-list-card {
@@ -22,11 +70,10 @@
 
 .services-list-link {
   display: block;
-
   color: var(--text-primary);
 }
 
-/* IMAGE */
+/* MEDIA */
 
 .services-list-media {
   position: relative;
@@ -88,7 +135,7 @@
       180deg,
       rgba(7, 7, 27, 0.25) 0%,
       rgba(7, 7, 27, 0) 48%,
-      rgba(7, 7, 27, 0.54) 100%
+      rgba(7, 7, 27, 0.58) 100%
     );
 }
 
@@ -119,7 +166,9 @@
 
   color: #ffffff;
 
-  border: 1px solid rgba(255, 255, 255, 0.56);
+  border: 1px solid
+    rgba(255, 255, 255, 0.56);
+
   border-radius: 50%;
 
   transition:
@@ -150,18 +199,15 @@
 /* CONTENT */
 
 .services-list-content {
-  padding-top: clamp(24px, 3vw, 44px);
-  padding-bottom: clamp(30px, 4vw, 60px);
+  padding-top: clamp(25px, 3vw, 44px);
 }
 
 .services-list-title {
-  max-width: 780px;
+  max-width: 760px;
 
-  color: var(--text-primary);
-
-  font-size: clamp(38px, 4.5vw, 82px);
+  font-size: clamp(36px, 4vw, 72px);
   font-weight: 500;
-  line-height: 0.96;
+  line-height: 0.95;
   letter-spacing: -0.055em;
 
   transition: color 300ms ease;
@@ -172,15 +218,61 @@
   color: var(--etra-pink);
 }
 
+.services-list-summary {
+  max-width: 680px;
+
+  margin-top: 24px;
+
+  color: var(--text-secondary);
+
+  font-size: clamp(14px, 0.95vw, 17px);
+  line-height: 1.7;
+}
+
+.services-list-capabilities {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 10px 20px;
+
+  margin-top: 26px;
+
+  list-style: none;
+}
+
+.services-list-capabilities li {
+  position: relative;
+
+  padding-left: 16px;
+
+  color: var(--text-secondary);
+
+  font-size: clamp(11px, 0.75vw, 14px);
+  line-height: 1.5;
+}
+
+.services-list-capabilities li::before {
+  content: "";
+
+  position: absolute;
+  top: 0.65em;
+  left: 0;
+
+  width: 5px;
+  height: 5px;
+
+  background: var(--etra-pink);
+  border-radius: 50%;
+}
+
 .services-list-more {
   width: fit-content;
-  margin-top: clamp(24px, 3vw, 40px);
+
+  margin-top: 30px;
 
   display: flex;
   align-items: center;
   gap: 16px;
-
-  color: var(--text-primary);
 
   font-size: 10px;
   font-weight: 700;
@@ -210,7 +302,8 @@
   transform: scaleX(0.25);
   transform-origin: left;
 
-  transition: transform 400ms var(--ease-out);
+  transition:
+    transform 400ms var(--ease-out);
 }
 
 .services-list-link:hover
@@ -225,9 +318,20 @@
     scroll-margin-top: 70px;
   }
 
+  .services-list-header {
+    display: block;
+
+    margin-bottom: 65px;
+  }
+
+  .services-list-header > p {
+    margin-top: 32px;
+  }
+
   .services-list-grid {
     grid-template-columns: 1fr;
-    gap: 58px;
+
+    gap: 75px;
   }
 
   .services-list-media {
@@ -244,17 +348,17 @@
     transform: none;
   }
 
-  .services-list-content {
-    padding-top: 22px;
-    padding-bottom: 0;
-  }
-
   .services-list-title {
-    font-size: clamp(38px, 11vw, 58px);
+    font-size: clamp(36px, 10vw, 56px);
   }
 
-  .services-list-more {
-    margin-top: 22px;
+  .services-list-capabilities {
+    grid-template-columns: 1fr;
+  }
+
+  .services-list-arrow {
+    width: 48px;
+    height: 48px;
   }
 }
 

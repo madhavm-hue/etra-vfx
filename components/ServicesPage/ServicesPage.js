@@ -1,5 +1,6 @@
 import ServicesHero from "./ServicesHero/ServicesHero";
 import ServicesOverview from "./ServicesOverview/ServicesOverview";
+import ServicesCapabilities from "./ServicesCapabilities/ServicesCapabilities";
 import ServicesPortfolio from "./ServicesPortfolio/ServicesPortfolio";
 
 import Contact from "../Contact/Contact";
@@ -11,9 +12,15 @@ export default function ServicesPage() {
   return (
     <div className="services-page">
       <ServicesHero />
+
       <ServicesOverview />
+
+      <ServicesCapabilities />
+
       <ServicesPortfolio />
+
       <Contact />
+
       <Footer />
     </div>
   );

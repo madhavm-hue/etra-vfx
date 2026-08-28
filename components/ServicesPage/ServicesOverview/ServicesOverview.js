@@ -16,9 +16,40 @@ export default function ServicesOverview({
     <section
       id="services-list"
       className="services-list-section"
-      aria-label="ETRA Dreams VFX services"
+      aria-labelledby="services-list-title"
     >
       <div className="site-container">
+        <motion.div
+          className="services-list-header"
+          initial={{ opacity: 0, y: 45 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{
+            once: true,
+            amount: 0.3,
+          }}
+          transition={{
+            duration: 0.9,
+            ease: revealEase,
+          }}
+        >
+          <div>
+            <p className="services-list-eyebrow">
+              End-to-end VFX
+            </p>
+
+            <h2 id="services-list-title">
+              Built for every
+              <span>stage of the shot.</span>
+            </h2>
+          </div>
+
+          <p>
+            From first-frame preparation to final
+            integration, our departments work as
+            one connected visual effects pipeline.
+          </p>
+        </motion.div>
+
         <div className="services-list-grid">
           {services.map((service, index) => (
             <motion.article
@@ -34,11 +65,14 @@ export default function ServicesOverview({
               }}
               viewport={{
                 once: true,
-                amount: 0.15,
+                amount: 0.12,
               }}
               transition={{
-                duration: 0.9,
-                delay: Math.min(index * 0.1, 0.3),
+                duration: 0.85,
+                delay: Math.min(
+                  (index % 2) * 0.1,
+                  0.1,
+                ),
                 ease: revealEase,
               }}
             >
@@ -52,8 +86,14 @@ export default function ServicesOverview({
                     src={service.image.src}
                     alt={service.image.alt}
                     fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="services-list-image services-list-static"
+                    sizes="
+                      (max-width: 768px) 100vw,
+                      50vw
+                    "
+                    className="
+                      services-list-image
+                      services-list-static
+                    "
                   />
 
                   <Image
@@ -62,8 +102,14 @@ export default function ServicesOverview({
                     fill
                     unoptimized
                     aria-hidden="true"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="services-list-image services-list-preview"
+                    sizes="
+                      (max-width: 768px) 100vw,
+                      50vw
+                    "
+                    className="
+                      services-list-image
+                      services-list-preview
+                    "
                   />
 
                   <div
@@ -87,12 +133,26 @@ export default function ServicesOverview({
                 </div>
 
                 <div className="services-list-content">
-                  <h2 className="services-list-title">
+                  <h3 className="services-list-title">
                     {service.title}
-                  </h2>
+                  </h3>
+
+                  <p className="services-list-summary">
+                    {service.summary}
+                  </p>
+
+                  <ul className="services-list-capabilities">
+                    {service.capabilities.map(
+                      (capability) => (
+                        <li key={capability}>
+                          {capability}
+                        </li>
+                      ),
+                    )}
+                  </ul>
 
                   <div className="services-list-more">
-                    <span>Learn more</span>
+                    <span>Explore service</span>
                     <span className="services-list-more-line" />
                   </div>
                 </div>
