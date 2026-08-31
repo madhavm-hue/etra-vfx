@@ -73,7 +73,7 @@ export default function Portfolio() {
           }}
         >
           <div className="home-portfolio-label">
-            <span className="home-portfolio-section-number">03</span>
+            <span className="home-portfolio-section-number"></span>
             <span className="home-portfolio-label-line" />
             <span>Selected work</span>
           </div>

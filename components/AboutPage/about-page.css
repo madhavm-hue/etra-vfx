@@ -1,0 +1,51 @@
+.about-page {
+  width: 100%;
+  min-height: 100vh;
+  overflow: clip;
+
+  color: var(--text-primary);
+  background: var(--background);
+
+  transition:
+    color 350ms ease,
+    background-color 350ms ease;
+}
+
+.about-page section {
+  transition:
+    color 350ms ease,
+    background-color 350ms ease,
+    border-color 350ms ease;
+}
+
+.about-page a {
+  color: inherit;
+}
+
+.about-page button,
+.about-page a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.about-page :focus-visible {
+  outline: 2px solid var(--accent-pink);
+  outline-offset: 4px;
+}
+
+.about-page ::selection {
+  color: #ffffff;
+  background: var(--accent-pink);
+}
+
+@supports not (overflow: clip) {
+  .about-page {
+    overflow: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-page,
+  .about-page section {
+    transition: none;
+  }
+}

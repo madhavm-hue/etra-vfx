@@ -1,0 +1,301 @@
+.why-etra {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  padding-block: var(--section-space);
+
+  color: var(--text-primary);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+.why-etra__container {
+  width: min(
+    calc(100% - (var(--page-padding) * 2)),
+    var(--site-max-width)
+  );
+
+  margin-inline: auto;
+}
+
+.why-etra__header {
+  display: grid;
+  grid-template-columns:
+    minmax(180px, 0.35fr)
+    minmax(0, 1fr);
+
+  gap: clamp(40px, 7vw, 110px);
+}
+
+.why-etra__section-label {
+  display: flex;
+  align-items: center;
+  align-self: start;
+  gap: 13px;
+
+  padding-top: 11px;
+
+  color: var(--text-secondary);
+
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.why-etra__label-line {
+  width: 38px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.45;
+}
+
+.why-etra__heading-copy {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.1fr)
+    minmax(280px, 0.9fr);
+
+  align-items: end;
+  gap: clamp(40px, 7vw, 100px);
+}
+
+.why-etra__heading-copy h2 {
+  margin: 0;
+
+  color: var(--text-primary);
+
+  font-size: var(--heading-md);
+  font-weight: 500;
+  line-height: 0.96;
+  letter-spacing: -0.055em;
+}
+
+.why-etra__heading-copy h2 span {
+  display: inline;
+  color: var(--accent-pink);
+  -webkit-text-stroke: 0;
+}
+
+.why-etra__heading-copy > p {
+  max-width: 520px;
+  margin: 0;
+
+  color: var(--text-secondary);
+
+  font-size: var(--text-base);
+  line-height: 1.75;
+}
+
+.why-etra__list {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  margin-top: clamp(65px, 8vw, 120px);
+
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+}
+
+.why-etra__item {
+  position: relative;
+
+  min-height: clamp(270px, 24vw, 370px);
+
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+
+  padding: clamp(28px, 3vw, 48px);
+
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+
+  background: transparent;
+
+  transition:
+    color var(--transition-medium),
+    background-color var(--transition-medium);
+}
+
+.why-etra__number {
+  color: var(--accent-pink);
+
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+
+  transition: color var(--transition-medium);
+}
+
+.why-etra__item h3 {
+  max-width: 500px;
+
+  margin: auto 0 20px;
+
+  color: var(--text-primary);
+
+  font-size: clamp(27px, 2.3vw, 42px);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+
+  transition: color var(--transition-medium);
+}
+
+.why-etra__item p {
+  max-width: 580px;
+  margin: 0;
+
+  color: var(--text-secondary);
+
+  font-size: var(--text-sm);
+  line-height: 1.7;
+
+  transition: color var(--transition-medium);
+}
+
+.why-etra__arrow {
+  position: absolute;
+  top: clamp(25px, 3vw, 43px);
+  right: clamp(25px, 3vw, 43px);
+
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+  place-items: center;
+
+  color: var(--accent-pink);
+
+  border: 1px solid var(--border);
+  border-radius: 50%;
+
+  font-size: 17px;
+
+  transition:
+    color var(--transition-medium),
+    background-color var(--transition-medium),
+    border-color var(--transition-medium),
+    transform var(--transition-medium);
+}
+
+.why-etra__item:hover {
+  color: #ffffff;
+  background: var(--accent-pink);
+}
+
+.why-etra__item:hover
+  .why-etra__number,
+.why-etra__item:hover h3,
+.why-etra__item:hover p {
+  color: #ffffff;
+}
+
+.why-etra__item:hover
+  .why-etra__arrow {
+  color: var(--accent-pink);
+  background: #ffffff;
+  border-color: #ffffff;
+  transform: rotate(45deg);
+}
+
+/* TABLET */
+
+@media (max-width: 1024px) {
+  .why-etra__header {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .why-etra__section-label {
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 800px) {
+  .why-etra__heading-copy {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .why-etra__list {
+    grid-template-columns: 1fr;
+  }
+
+  .why-etra__item {
+    min-height: 270px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 640px) {
+  .why-etra__heading-copy h2 {
+    font-size:
+      clamp(44px, 12vw, 66px);
+  }
+
+  .why-etra__list {
+    margin-top: 60px;
+  }
+
+  .why-etra__item {
+    min-height: 250px;
+    padding: 26px;
+  }
+
+  .why-etra__item h3 {
+    padding-right: 45px;
+    font-size: 28px;
+  }
+
+  .why-etra__arrow {
+    top: 24px;
+    right: 24px;
+  }
+}
+
+/* TOUCH */
+
+@media (hover: none) {
+  .why-etra__item:hover {
+    color: var(--text-primary);
+    background: transparent;
+  }
+
+  .why-etra__item:hover
+    .why-etra__number {
+    color: var(--accent-pink);
+  }
+
+  .why-etra__item:hover h3 {
+    color: var(--text-primary);
+  }
+
+  .why-etra__item:hover p {
+    color: var(--text-secondary);
+  }
+
+  .why-etra__item:hover
+    .why-etra__arrow {
+    color: var(--accent-pink);
+    background: transparent;
+    border-color: var(--border);
+    transform: none;
+  }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+  .why-etra__item,
+  .why-etra__number,
+  .why-etra__item h3,
+  .why-etra__item p,
+  .why-etra__arrow {
+    transition: none;
+  }
+}
