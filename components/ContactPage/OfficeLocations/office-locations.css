@@ -1,0 +1,479 @@
+.office-locations {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  padding-block: var(--section-space);
+
+  color: var(--text-primary);
+  background: var(--surface);
+
+  border-top: 1px solid var(--border);
+}
+
+.office-locations-header {
+  display: grid;
+  grid-template-columns:
+    minmax(180px, 0.35fr)
+    minmax(0, 1fr);
+
+  gap: clamp(40px, 7vw, 110px);
+}
+
+.office-locations-label {
+  display: flex;
+  align-items: center;
+  align-self: start;
+  gap: 13px;
+
+  padding-top: 11px;
+
+  color: var(--text-secondary);
+
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.office-locations-label-line {
+  width: 38px;
+  height: 1px;
+
+  background: currentColor;
+  opacity: 0.45;
+}
+
+.office-locations-heading {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.1fr)
+    minmax(280px, 0.9fr);
+
+  align-items: end;
+  gap: clamp(40px, 7vw, 100px);
+}
+
+.office-locations-heading h2 {
+  margin: 0;
+
+  color: var(--text-primary);
+
+  font-size: var(--heading-md);
+  font-weight: 500;
+  line-height: 0.96;
+  letter-spacing: -0.055em;
+}
+
+.office-locations-heading h2 span {
+  display: block;
+  color: var(--accent-pink);
+}
+
+.office-locations-heading > p {
+  max-width: 520px;
+  margin: 0;
+
+  color: var(--text-secondary);
+
+  font-size: var(--text-base);
+  line-height: 1.75;
+}
+
+.office-locations-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: clamp(20px, 2vw, 34px);
+
+  margin-top: clamp(65px, 8vw, 120px);
+}
+
+.office-location-card {
+  position: relative;
+
+  min-height: clamp(520px, 43vw, 680px);
+
+  padding: clamp(28px, 3.5vw, 58px);
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  color: var(--text-primary);
+  background: var(--card-bg);
+
+  border: 1px solid var(--border);
+
+  box-shadow:
+    0 22px 70px
+    var(--shadow-color);
+
+  transition:
+    color var(--transition-medium),
+    background-color var(--transition-medium),
+    border-color var(--transition-medium),
+    transform 600ms var(--ease-out),
+    box-shadow var(--transition-medium);
+}
+
+.office-location-card:hover {
+  color: #ffffff;
+
+  transform: translateY(-8px);
+
+  box-shadow:
+    0 30px 90px
+    color-mix(
+      in srgb,
+      var(--office-accent) 24%,
+      transparent
+    );
+}
+
+.office-location-card-pink {
+  --office-accent: var(--accent-pink);
+}
+
+.office-location-card-purple {
+  --office-accent: var(--accent-purple);
+}
+
+.office-location-card::before {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  content: "";
+
+  background: var(--office-accent);
+
+  transform: translateY(101%);
+
+  transition:
+    transform 600ms var(--ease-out);
+}
+
+.office-location-card:hover::before {
+  transform: translateY(0);
+}
+
+.office-location-card-top,
+.office-location-card-content,
+.office-location-card-links {
+  position: relative;
+  z-index: 2;
+}
+
+.office-location-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.office-location-number,
+.office-location-timezone {
+  color: var(--office-accent);
+
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+
+  transition: color var(--transition-medium);
+}
+
+.office-location-timezone {
+  width: 48px;
+  height: 48px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--border);
+  border-radius: 50%;
+}
+
+.office-location-card:hover
+  .office-location-number,
+.office-location-card:hover
+  .office-location-timezone {
+  color: #ffffff;
+}
+
+.office-location-card-content {
+  margin-block: auto;
+  padding-block: 70px;
+}
+
+.office-location-type {
+  margin: 0 0 18px;
+
+  color: var(--office-accent);
+
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+
+  transition: color var(--transition-medium);
+}
+
+.office-location-card-content h3 {
+  max-width: 650px;
+  margin: 0;
+
+  color: var(--text-primary);
+
+  font-size: clamp(42px, 4.6vw, 82px);
+  font-weight: 500;
+  line-height: 0.94;
+  letter-spacing: -0.055em;
+
+  transition: color var(--transition-medium);
+}
+
+.office-location-time {
+  margin-top: 24px;
+
+  color: var(--text-secondary);
+
+  font-size: var(--text-sm);
+  line-height: 1.6;
+
+  transition: color var(--transition-medium);
+}
+
+.office-location-card:hover
+  .office-location-type,
+.office-location-card:hover
+  .office-location-card-content h3,
+.office-location-card:hover
+  .office-location-time {
+  color: #ffffff;
+}
+
+.office-location-card-links {
+  display: grid;
+  border-top: 1px solid var(--border);
+}
+
+.office-location-link {
+  display: grid;
+  grid-template-columns:
+    70px minmax(0, 1fr) auto;
+
+  align-items: center;
+  gap: 20px;
+
+  min-height: 65px;
+
+  color: var(--text-primary);
+
+  border-bottom: 1px solid var(--border);
+
+  transition:
+    color var(--transition-fast),
+    padding var(--transition-medium),
+    border-color var(--transition-medium);
+}
+
+.office-location-link > span:first-child {
+  color: var(--text-secondary);
+
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  transition: color var(--transition-medium);
+}
+
+.office-location-link strong {
+  min-width: 0;
+
+  overflow-wrap: anywhere;
+
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.office-location-link > span:last-child {
+  font-size: 18px;
+
+  transition: transform var(--transition-medium);
+}
+
+.office-location-link:hover {
+  padding-inline: 8px;
+}
+
+.office-location-link:hover
+  > span:last-child {
+  transform: rotate(45deg);
+}
+
+.office-location-card:hover
+  .office-location-card-links,
+.office-location-card:hover
+  .office-location-link {
+  border-color: rgb(255 255 255 / 28%);
+}
+
+.office-location-card:hover
+  .office-location-link,
+.office-location-card:hover
+  .office-location-link
+  > span:first-child {
+  color: #ffffff;
+}
+
+.office-location-card-orbit {
+  position: absolute;
+  top: -22%;
+  right: -20%;
+  z-index: 1;
+
+  width: 55%;
+  aspect-ratio: 1;
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--office-accent) 30%,
+      transparent
+    );
+
+  border-radius: 50%;
+
+  transition:
+    border-color var(--transition-medium),
+    transform 800ms var(--ease-out);
+}
+
+.office-location-card:hover
+  .office-location-card-orbit {
+  border-color: rgb(255 255 255 / 28%);
+  transform: scale(1.18);
+}
+
+/* TABLET */
+
+@media (max-width: 1024px) {
+  .office-locations-header {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .office-locations-label {
+    padding-top: 0;
+  }
+
+  .office-location-card {
+    min-height: 570px;
+  }
+
+  .office-location-card-content h3 {
+    font-size:
+      clamp(40px, 5.5vw, 62px);
+  }
+}
+
+@media (max-width: 800px) {
+  .office-locations-heading {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .office-locations-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 640px) {
+  .office-locations-heading h2 {
+    font-size:
+      clamp(44px, 12vw, 66px);
+  }
+
+  .office-locations-grid {
+    margin-top: 60px;
+  }
+
+  .office-location-card {
+    min-height: 520px;
+    padding: 26px;
+  }
+
+  .office-location-card-content {
+    padding-block: 55px;
+  }
+
+  .office-location-card-content h3 {
+    font-size:
+      clamp(40px, 12vw, 58px);
+  }
+
+  .office-location-link {
+    grid-template-columns: 55px minmax(0, 1fr) auto;
+    gap: 12px;
+  }
+}
+
+/* TOUCH */
+
+@media (hover: none) {
+  .office-location-card:hover {
+    color: var(--text-primary);
+    transform: none;
+  }
+
+  .office-location-card::before {
+    display: none;
+  }
+
+  .office-location-card:hover
+    .office-location-number,
+  .office-location-card:hover
+    .office-location-timezone,
+  .office-location-card:hover
+    .office-location-type {
+    color: var(--office-accent);
+  }
+
+  .office-location-card:hover
+    .office-location-card-content h3,
+  .office-location-card:hover
+    .office-location-link {
+    color: var(--text-primary);
+  }
+
+  .office-location-card:hover
+    .office-location-time,
+  .office-location-card:hover
+    .office-location-link
+    > span:first-child {
+    color: var(--text-secondary);
+  }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+  .office-location-card,
+  .office-location-card::before,
+  .office-location-number,
+  .office-location-timezone,
+  .office-location-type,
+  .office-location-card-content h3,
+  .office-location-time,
+  .office-location-link,
+  .office-location-link > span:last-child,
+  .office-location-card-orbit {
+    transition: none;
+  }
+}

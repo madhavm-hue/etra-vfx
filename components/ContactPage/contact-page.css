@@ -1,0 +1,51 @@
+.contact-page {
+  width: 100%;
+  min-height: 100vh;
+  overflow: clip;
+
+  color: var(--text-primary);
+  background: var(--background);
+
+  transition:
+    color 350ms ease,
+    background-color 350ms ease;
+}
+
+.contact-page section {
+  transition:
+    color 350ms ease,
+    background-color 350ms ease,
+    border-color 350ms ease;
+}
+
+.contact-page a {
+  color: inherit;
+}
+
+.contact-page button,
+.contact-page a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.contact-page :focus-visible {
+  outline: 2px solid var(--accent-pink);
+  outline-offset: 4px;
+}
+
+.contact-page ::selection {
+  color: #ffffff;
+  background: var(--accent-pink);
+}
+
+@supports not (overflow: clip) {
+  .contact-page {
+    overflow: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-page,
+  .contact-page section {
+    transition: none;
+  }
+}
