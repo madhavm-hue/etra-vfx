@@ -98,3 +98,12 @@ export const contactFormData = {
   successMessage:
     "Your enquiry has been received. Our production team will contact you shortly.",
 };
+export const productionMapData = {
+  eyebrow: "Production Office",
+  title: "Find Us",
+  highlightedTitle: "In Tamil Nadu.",
+  company: "Etra Dreams Private Limited",
+  address:
+    "3/402/B, Muthuramalingapuram, Padanthal, Padandal, Tamil Nadu 626203, India",
+  mapButtonLabel: "Open in Google Maps",
+};
