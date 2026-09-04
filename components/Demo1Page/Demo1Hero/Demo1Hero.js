@@ -54,9 +54,7 @@ export default function Demo1Hero() {
           animate="visible"
         >
           <p className="demo1-hero-eyebrow">
-            <span>01</span>
-            <span className="demo1-hero-eyebrow-line" />
-            <span>Demo 1</span>
+           
           </p>
 
           <h1

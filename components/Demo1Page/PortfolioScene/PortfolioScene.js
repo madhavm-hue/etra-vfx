@@ -1057,7 +1057,7 @@ export default function PortfolioScene() {
             <div className="site-container portfolio-scene-interface-inner">
               <div className="portfolio-scene-copy">
                 <p className="portfolio-scene-label">
-                  Demo 1
+                  
                 </p>
 
                 <h2
