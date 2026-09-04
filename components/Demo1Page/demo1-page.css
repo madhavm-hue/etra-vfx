@@ -1,0 +1,9 @@
+.demo1-page {
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+
+  color: var(--text-primary);
+  background: var(--background);
+}

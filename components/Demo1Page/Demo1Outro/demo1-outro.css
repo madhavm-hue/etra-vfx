@@ -1,0 +1,513 @@
+/* ===================================
+   DEMO 1 OUTRO
+=================================== */
+
+.demo1-outro {
+  position: relative;
+  isolation: isolate;
+
+  width: 100%;
+  min-height: 100svh;
+
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
+
+  color: #ffffff;
+  background: #f50057;
+}
+
+/* ===================================
+   BACKGROUND
+=================================== */
+
+.demo1-outro-background {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.demo1-outro-background::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      120deg,
+      rgba(245, 0, 87, 0.98),
+      rgba(245, 0, 135, 0.96)
+    );
+}
+
+/* ===================================
+   DECORATIVE CIRCLES
+=================================== */
+
+.demo1-outro-circle {
+  position: absolute;
+
+  display: block;
+
+  border: 1px solid
+    rgba(255, 255, 255, 0.2);
+
+  border-radius: 50%;
+}
+
+.demo1-outro-circle-one {
+  top: -20%;
+  right: -7%;
+
+  width: clamp(440px, 50vw, 920px);
+  aspect-ratio: 1;
+
+  animation:
+    demo1-outro-circle-float
+    12s ease-in-out infinite;
+}
+
+.demo1-outro-circle-two {
+  right: 7%;
+  bottom: -42%;
+
+  width: clamp(280px, 32vw, 620px);
+  aspect-ratio: 1;
+
+  animation:
+    demo1-outro-circle-float
+    9s ease-in-out infinite reverse;
+}
+
+/* ===================================
+   GLOW
+=================================== */
+
+.demo1-outro-glow {
+  position: absolute;
+  top: 20%;
+  right: 14%;
+
+  width: clamp(230px, 27vw, 540px);
+  aspect-ratio: 1;
+
+  display: block;
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.13);
+
+  filter: blur(90px);
+}
+
+/* ===================================
+   LARGE BACKGROUND WORD
+=================================== */
+
+.demo1-outro-word {
+  position: absolute;
+  right: -0.04em;
+  bottom: -0.22em;
+
+  color: transparent;
+
+  font-size:
+    clamp(180px, 32vw, 650px);
+
+  font-weight: 700;
+  line-height: 0.75;
+  letter-spacing: -0.09em;
+
+  -webkit-text-stroke:
+    1px rgba(255, 255, 255, 0.12);
+
+  user-select: none;
+}
+
+/* ===================================
+   INNER
+=================================== */
+
+.demo1-outro-inner {
+  position: relative;
+
+  min-height: 100svh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding-top:
+    clamp(120px, 14vh, 210px);
+
+  padding-bottom:
+    clamp(60px, 7vh, 100px);
+}
+
+/* ===================================
+   HEADER
+=================================== */
+
+.demo1-outro-header {
+  position: relative;
+  z-index: 2;
+}
+
+.demo1-outro-label {
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  margin-bottom:
+    clamp(32px, 5vw, 72px);
+
+  color: rgba(255, 255, 255, 0.72);
+
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.demo1-outro-label-line {
+  width:
+    clamp(38px, 4vw, 70px);
+
+  height: 1px;
+
+  background:
+    rgba(255, 255, 255, 0.38);
+}
+
+/* ===================================
+   TITLE
+=================================== */
+
+.demo1-outro-title {
+  max-width: 1380px;
+
+  color: #ffffff;
+
+  font-size:
+    clamp(58px, 8vw, 150px);
+
+  font-weight: 500;
+  line-height: 0.86;
+  letter-spacing: -0.07em;
+
+  text-wrap: balance;
+}
+
+.demo1-outro-title span {
+  display: block;
+
+  color: transparent;
+
+  -webkit-text-stroke:
+    1.5px rgba(255, 255, 255, 0.82);
+}
+
+/* ===================================
+   FOOTER CONTENT
+=================================== */
+
+.demo1-outro-footer {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: clamp(40px, 7vw, 130px);
+
+  margin-top:
+    clamp(90px, 13vh, 180px);
+
+  padding-top: 32px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.26);
+}
+
+.demo1-outro-description {
+  max-width: 530px;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  font-size:
+    clamp(14px, 1vw, 18px);
+
+  line-height: 1.7;
+}
+
+/* ===================================
+   ACTIONS
+=================================== */
+
+.demo1-outro-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 14px;
+}
+
+.demo1-outro-link {
+  min-height: 54px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 18px;
+
+  padding: 6px 7px 6px 22px;
+
+  border: 1px solid
+    rgba(255, 255, 255, 0.42);
+
+  border-radius: 999px;
+
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  transition:
+    color 350ms ease,
+    background-color 350ms ease,
+    border-color 350ms ease,
+    transform 450ms var(--ease-out),
+    box-shadow 350ms ease;
+}
+
+.demo1-outro-link-icon {
+  width: 40px;
+  height: 40px;
+
+  display: grid;
+  place-items: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  transition:
+    color 350ms ease,
+    background-color 350ms ease,
+    transform 450ms var(--ease-out);
+}
+
+.demo1-outro-link-icon svg {
+  width: 17px;
+  height: 17px;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* PRIMARY */
+
+.demo1-outro-link-primary {
+  color: #11152f;
+  background: #ffffff;
+  border-color: #ffffff;
+}
+
+.demo1-outro-link-primary
+  .demo1-outro-link-icon {
+  color: #ffffff;
+  background: #11152f;
+}
+
+/* SECONDARY */
+
+.demo1-outro-link-secondary {
+  color: #ffffff;
+  background: transparent;
+}
+
+.demo1-outro-link-secondary
+  .demo1-outro-link-icon {
+  color: #f50087;
+  background: #ffffff;
+}
+
+/* HOVER */
+
+.demo1-outro-link:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 18px 44px rgba(67, 0, 35, 0.2);
+}
+
+.demo1-outro-link-primary:hover {
+  color: #ffffff;
+  background: #11152f;
+  border-color: #11152f;
+}
+
+.demo1-outro-link-primary:hover
+  .demo1-outro-link-icon {
+  color: #11152f;
+  background: #ffffff;
+
+  transform: translateX(3px);
+}
+
+.demo1-outro-link-secondary:hover {
+  color: #11152f;
+  background: #ffffff;
+  border-color: #ffffff;
+}
+
+.demo1-outro-link-secondary:hover
+  .demo1-outro-link-icon {
+  color: #ffffff;
+  background: #11152f;
+
+  transform: translateX(-3px);
+}
+
+/* ===================================
+   ANIMATION
+=================================== */
+
+@keyframes demo1-outro-circle-float {
+  0%,
+  100% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      translate3d(-32px, 24px, 0)
+      scale(1.06);
+  }
+}
+
+/* ===================================
+   TABLET
+=================================== */
+
+@media (max-width: 1024px) {
+  .demo1-outro-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .demo1-outro-actions {
+    justify-content: flex-start;
+  }
+}
+
+/* ===================================
+   MOBILE
+=================================== */
+
+@media (max-width: 640px) {
+  .demo1-outro {
+    min-height: auto;
+  }
+
+  .demo1-outro-inner {
+    min-height: 100svh;
+
+    padding-top: 110px;
+    padding-bottom: 50px;
+  }
+
+  .demo1-outro-label {
+    gap: 10px;
+
+    margin-bottom: 36px;
+
+    font-size: 8px;
+  }
+
+  .demo1-outro-title {
+    font-size:
+      clamp(50px, 15vw, 76px);
+
+    line-height: 0.9;
+  }
+
+  .demo1-outro-footer {
+    gap: 36px;
+
+    margin-top: 100px;
+    padding-top: 24px;
+  }
+
+  .demo1-outro-description {
+    max-width: 400px;
+
+    font-size: 14px;
+  }
+
+  .demo1-outro-actions {
+    width: 100%;
+
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .demo1-outro-link {
+    width: 100%;
+
+    justify-content: space-between;
+  }
+
+  .demo1-outro-circle-one {
+    top: -5%;
+    right: -75%;
+
+    width: 150vw;
+  }
+
+  .demo1-outro-circle-two {
+    right: -15%;
+    bottom: -8%;
+
+    width: 100vw;
+  }
+
+  .demo1-outro-word {
+    right: -0.1em;
+    bottom: -0.05em;
+
+    font-size: 58vw;
+  }
+}
+
+/* ===================================
+   REDUCED MOTION
+=================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .demo1-outro-circle {
+    animation: none;
+  }
+
+  .demo1-outro-link,
+  .demo1-outro-link-icon {
+    transition: none;
+  }
+}

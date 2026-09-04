@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
+
 import "./globals.css";
 
 const geistSans = Geist({
@@ -18,6 +19,7 @@ export const metadata = {
     default: "ETRA VFX | Visual Effects & Creative Studio",
     template: "%s | ETRA VFX",
   },
+
   description:
     "ETRA VFX is a creative visual effects studio delivering high-end VFX, CGI, animation and digital experiences.",
 };
@@ -41,15 +43,22 @@ const themeScript = `
 })();
 `;
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children,
+}) {
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: themeScript,
+          }}
+        />
       </head>
 
       <body>{children}</body>

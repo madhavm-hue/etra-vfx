@@ -1,6 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -20,6 +24,12 @@ const navLinks = [
   {
     label: "Portfolio",
     href: "/portfolio",
+    children: [
+      {
+        label: "Demo 1",
+        href: "/portfolio/demo1",
+      },
+    ],
   },
   {
     label: "About Us",
@@ -37,9 +47,15 @@ const navLinks = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const dropdownRef = useRef(null);
 
   const [menuOpen, setMenuOpen] =
     useState(false);
+
+  const [
+    portfolioDropdownOpen,
+    setPortfolioDropdownOpen,
+  ] = useState(false);
 
   const [introReady, setIntroReady] =
     useState(false);
@@ -47,14 +63,13 @@ export default function Navbar() {
   const [navbarVisible, setNavbarVisible] =
     useState(pathname !== "/");
 
-  /* =========================
-     HANDLE ROUTE CHANGE
-  ========================= */
+  /* ROUTE CHANGE */
 
   useEffect(() => {
     const frame =
       window.requestAnimationFrame(() => {
         setMenuOpen(false);
+        setPortfolioDropdownOpen(false);
 
         if (pathname !== "/") {
           setIntroReady(true);
@@ -67,10 +82,7 @@ export default function Navbar() {
             "data-etra-intro-complete",
           ) === "true";
 
-        setIntroReady(
-          introAlreadyCompleted,
-        );
-
+        setIntroReady(introAlreadyCompleted);
         setNavbarVisible(
           introAlreadyCompleted,
         );
@@ -81,15 +93,13 @@ export default function Navbar() {
     };
   }, [pathname]);
 
-  /* =========================
-     CLOSE MOBILE MENU
-     WHEN ESCAPE IS PRESSED
-  ========================= */
+  /* ESCAPE */
 
   useEffect(() => {
     const handleEscape = (event) => {
       if (event.key === "Escape") {
         setMenuOpen(false);
+        setPortfolioDropdownOpen(false);
       }
     };
 
@@ -106,9 +116,34 @@ export default function Navbar() {
     };
   }, []);
 
-  /* =========================
-     MOBILE MENU SCROLL LOCK
-  ========================= */
+  /* CLOSE DESKTOP DROPDOWN OUTSIDE */
+
+  useEffect(() => {
+    const handlePointerDown = (event) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(
+          event.target,
+        )
+      ) {
+        setPortfolioDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener(
+      "pointerdown",
+      handlePointerDown,
+    );
+
+    return () => {
+      document.removeEventListener(
+        "pointerdown",
+        handlePointerDown,
+      );
+    };
+  }, []);
+
+  /* MOBILE SCROLL LOCK */
 
   useEffect(() => {
     if (!menuOpen) {
@@ -126,9 +161,7 @@ export default function Navbar() {
     };
   }, [menuOpen]);
 
-  /* =========================
-     WAIT FOR HOME INTRO
-  ========================= */
+  /* WAIT FOR HOME INTRO */
 
   useEffect(() => {
     if (pathname !== "/") {
@@ -156,10 +189,7 @@ export default function Navbar() {
     };
   }, [pathname]);
 
-  /* =========================
-     SHOW NAVBAR AFTER
-     FIRST LIGHT SCROLL
-  ========================= */
+  /* SHOW NAVBAR AFTER SCROLL */
 
   useEffect(() => {
     if (
@@ -203,9 +233,7 @@ export default function Navbar() {
     navbarVisible,
   ]);
 
-  /* =========================
-     ACTIVE LINK CHECK
-  ========================= */
+  /* ACTIVE LINK */
 
   const isActiveLink = (href) => {
     if (href === "/") {
@@ -218,38 +246,34 @@ export default function Navbar() {
     );
   };
 
-  /* =========================
-     MENU FUNCTIONS
-  ========================= */
-
   const closeMenu = () => {
     setMenuOpen(false);
+    setPortfolioDropdownOpen(false);
   };
 
   const toggleMenu = () => {
     setMenuOpen(
       (currentState) => !currentState,
     );
+
+    setPortfolioDropdownOpen(false);
   };
 
-  /* =========================
-     HEADER CLASSES
-  ========================= */
+  const togglePortfolioDropdown = () => {
+    setPortfolioDropdownOpen(
+      (currentState) => !currentState,
+    );
+  };
 
   const headerClasses = [
     "site-header",
-
     pathname === "/"
       ? "home-intro-header"
       : "",
-
     navbarVisible
       ? "navbar-visible"
       : "",
-
-    menuOpen
-      ? "menu-open"
-      : "",
+    menuOpen ? "menu-open" : "",
   ]
     .filter(Boolean)
     .join(" ");
@@ -257,8 +281,6 @@ export default function Navbar() {
   return (
     <header className={headerClasses}>
       <div className="site-container navbar-inner">
-        {/* LOGO */}
-
         <Link
           href="/"
           className="navbar-logo"
@@ -295,6 +317,95 @@ export default function Navbar() {
             const active =
               isActiveLink(item.href);
 
+            if (item.children) {
+              return (
+                <div
+                  key={item.href}
+                  ref={dropdownRef}
+                  className={`navbar-dropdown ${
+                    portfolioDropdownOpen
+                      ? "open"
+                      : ""
+                  }`}
+                >
+                  <div className="navbar-dropdown-trigger">
+                    <Link
+                      href={item.href}
+                      className={`navbar-link ${
+                        active ? "active" : ""
+                      }`}
+                      aria-current={
+                        pathname === item.href
+                          ? "page"
+                          : undefined
+                      }
+                    >
+                      {item.label}
+                    </Link>
+
+                    <button
+                      type="button"
+                      className="navbar-dropdown-toggle"
+                      onClick={
+                        togglePortfolioDropdown
+                      }
+                      aria-label="Toggle Portfolio submenu"
+                      aria-expanded={
+                        portfolioDropdownOpen
+                      }
+                      aria-controls="portfolio-submenu"
+                    >
+                      <svg viewBox="0 0 12 12">
+                        <path d="M2 4L6 8L10 4" />
+                      </svg>
+                    </button>
+                  </div>
+
+                  <div
+                    id="portfolio-submenu"
+                    className="navbar-dropdown-menu"
+                  >
+                    {item.children.map(
+                      (child) => {
+                        const childActive =
+                          pathname === child.href;
+
+                        return (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            className={`navbar-dropdown-link ${
+                              childActive
+                                ? "active"
+                                : ""
+                            }`}
+                            aria-current={
+                              childActive
+                                ? "page"
+                                : undefined
+                            }
+                            onClick={() =>
+                              setPortfolioDropdownOpen(
+                                false,
+                              )
+                            }
+                          >
+                            <span>01</span>
+                            <strong>
+                              {child.label}
+                            </strong>
+                            <span aria-hidden="true">
+                              ↗
+                            </span>
+                          </Link>
+                        );
+                      },
+                    )}
+                  </div>
+                </div>
+              );
+            }
+
             return (
               <Link
                 key={item.href}
@@ -303,7 +414,7 @@ export default function Navbar() {
                   active ? "active" : ""
                 }`}
                 aria-current={
-                  active
+                  pathname === item.href
                     ? "page"
                     : undefined
                 }
@@ -313,8 +424,6 @@ export default function Navbar() {
             );
           })}
         </nav>
-
-        {/* NAVBAR ACTIONS */}
 
         <div className="navbar-actions">
           <ThemeToggle />
@@ -348,38 +457,102 @@ export default function Navbar() {
           className="site-container mobile-menu-nav"
           aria-label="Mobile navigation"
         >
-          {navLinks.map(
-            (item, index) => {
-              const active =
-                isActiveLink(item.href);
+          {navLinks.map((item, index) => {
+            const active =
+              isActiveLink(item.href);
 
+            if (item.children) {
               return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={closeMenu}
-                  className={`mobile-menu-link ${
-                    active ? "active" : ""
+                <div
+                  className={`mobile-menu-group ${
+                    portfolioDropdownOpen
+                      ? "open"
+                      : ""
                   }`}
-                  aria-current={
-                    active
-                      ? "page"
-                      : undefined
-                  }
+                  key={item.href}
                 >
-                  <span className="mobile-menu-number">
-                    {String(
-                      index + 1,
-                    ).padStart(2, "0")}
-                  </span>
+                  <div className="mobile-menu-parent">
+                    <span className="mobile-menu-number">
+                      {String(
+                        index + 1,
+                      ).padStart(2, "0")}
+                    </span>
 
-                  <span>
-                    {item.label}
-                  </span>
-                </Link>
+                    <Link
+                      href={item.href}
+                      onClick={closeMenu}
+                      className={`mobile-menu-parent-link ${
+                        active ? "active" : ""
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+
+                    <button
+                      type="button"
+                      className="mobile-submenu-toggle"
+                      onClick={
+                        togglePortfolioDropdown
+                      }
+                      aria-label="Toggle Portfolio submenu"
+                      aria-expanded={
+                        portfolioDropdownOpen
+                      }
+                    >
+                      <span />
+                      <span />
+                    </button>
+                  </div>
+
+                  <div className="mobile-submenu">
+                    {item.children.map(
+                      (child) => (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          onClick={closeMenu}
+                          className={
+                            pathname === child.href
+                              ? "active"
+                              : ""
+                          }
+                        >
+                          <span>—</span>
+                          <span>
+                            {child.label}
+                          </span>
+                        </Link>
+                      ),
+                    )}
+                  </div>
+                </div>
               );
-            },
-          )}
+            }
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={closeMenu}
+                className={`mobile-menu-link ${
+                  active ? "active" : ""
+                }`}
+                aria-current={
+                  pathname === item.href
+                    ? "page"
+                    : undefined
+                }
+              >
+                <span className="mobile-menu-number">
+                  {String(
+                    index + 1,
+                  ).padStart(2, "0")}
+                </span>
+
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
         </nav>
       </div>
     </header>
