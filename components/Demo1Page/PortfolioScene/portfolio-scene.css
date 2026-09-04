@@ -10,7 +10,7 @@
   height: 1600vh;
 
   color: #ffffff;
-  background: #07071b;
+  background: #050515;
 }
 
 .portfolio-scene-sticky {
@@ -21,7 +21,8 @@
   height: 100svh;
 
   overflow: hidden;
-  background: #07071b;
+
+  background: #050515;
 }
 
 /* ===================================
@@ -51,33 +52,11 @@
   outline: none;
 }
 
-/* CINEMATIC OVERLAYS */
+/* ===================================
+   CINEMATIC OVERLAYS
+=================================== */
 
-.portfolio-scene-sticky::before {
-  content: "";
-
-  position: absolute;
-  z-index: 2;
-  inset: 0;
-
-  pointer-events: none;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(7, 7, 27, 0.92) 0%,
-      rgba(7, 7, 27, 0.48) 24%,
-      transparent 48%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(7, 7, 27, 0.42) 0%,
-      transparent 20%,
-      transparent 74%,
-      rgba(7, 7, 27, 0.72) 100%
-    );
-}
-
+.portfolio-scene-sticky::before,
 .portfolio-scene-sticky::after {
   content: "";
 
@@ -86,12 +65,33 @@
   inset: 0;
 
   pointer-events: none;
+}
 
+.portfolio-scene-sticky::before {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(5, 5, 21, 0.96) 0%,
+      rgba(5, 5, 21, 0.76) 24%,
+      rgba(5, 5, 21, 0.08) 48%,
+      transparent 68%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(5, 5, 21, 0.44) 0%,
+      transparent 24%,
+      transparent 72%,
+      rgba(5, 5, 21, 0.7) 100%
+    );
+}
+
+.portfolio-scene-sticky::after {
   background:
     radial-gradient(
-      circle at center,
-      transparent 42%,
-      rgba(0, 0, 0, 0.48) 100%
+      circle at 66% 46%,
+      transparent 18%,
+      rgba(4, 4, 18, 0.12) 48%,
+      rgba(0, 0, 0, 0.58) 100%
     );
 }
 
@@ -111,7 +111,7 @@
   gap: 18px;
 
   color: #b8b5c8;
-  background: #07071b;
+  background: #050515;
 }
 
 .portfolio-scene-loader span {
@@ -123,15 +123,19 @@
   border: 1px solid
     rgba(255, 255, 255, 0.15);
 
-  border-top-color: var(--accent-pink);
+  border-top-color:
+    var(--accent-pink);
+
   border-radius: 50%;
 
   animation:
-    portfolio-loader-spin 850ms
-    linear infinite;
+    portfolio-loader-spin
+    850ms linear infinite;
 }
 
 .portfolio-scene-loader p {
+  color: #b8b5c8;
+
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.18em;
@@ -156,21 +160,24 @@
   height: 100%;
 
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+  align-items: center;
 
-  gap: clamp(30px, 5vw, 90px);
+  padding-top:
+    clamp(110px, 13vh, 170px);
 
-  padding-top: clamp(130px, 14vh, 190px);
-  padding-bottom: clamp(70px, 8vh, 110px);
+  padding-bottom:
+    clamp(55px, 7vh, 90px);
 }
 
 /* ===================================
-   PROJECT COPY
+   PROJECT INFORMATION
 =================================== */
 
 .portfolio-scene-copy {
-  width: min(520px, 40vw);
+  width: min(500px, 34vw);
+
+  transform:
+    translateY(10vh);
 }
 
 .portfolio-scene-label {
@@ -183,7 +190,7 @@
   color: var(--accent-pink);
 
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -195,33 +202,37 @@
   width: 34px;
   height: 1px;
 
+  flex-shrink: 0;
+
   background: currentColor;
 }
 
 .portfolio-scene-title {
+  max-width: 500px;
+
   color: #ffffff;
 
   font-size:
-    clamp(46px, 5.5vw, 104px);
+    clamp(45px, 4.8vw, 88px);
 
   font-weight: 500;
-  line-height: 0.9;
-  letter-spacing: -0.065em;
+  line-height: 0.91;
+  letter-spacing: -0.06em;
 
   text-wrap: balance;
 
   animation:
-    portfolio-title-reveal 700ms
-    var(--ease-out) both;
+    portfolio-title-reveal
+    700ms var(--ease-out) both;
 }
 
 .portfolio-scene-category {
-  margin-top: 22px;
+  margin-top: 21px;
 
   color: #b8b5c8;
 
   font-size:
-    clamp(11px, 0.8vw, 14px);
+    clamp(10px, 0.72vw, 13px);
 
   font-weight: 600;
   letter-spacing: 0.15em;
@@ -229,7 +240,8 @@
 
   animation:
     portfolio-category-reveal
-    700ms var(--ease-out) 80ms both;
+    700ms var(--ease-out)
+    80ms both;
 }
 
 /* ===================================
@@ -237,14 +249,16 @@
 =================================== */
 
 .portfolio-scene-progress {
-  width: min(340px, 28vw);
+  width: min(300px, 24vw);
 
   display: grid;
   grid-template-columns:
     auto 1fr auto;
   align-items: center;
-
   gap: 16px;
+
+  margin-top:
+    clamp(40px, 6vh, 72px);
 
   color: #b8b5c8;
 
@@ -275,26 +289,30 @@
 
   display: block;
 
-  background: var(--accent-pink);
+  background:
+    var(--accent-pink);
 
-  transform: scaleX(0);
   transform-origin: left;
 
   transition:
-    transform 700ms var(--ease-out);
+    transform 700ms
+    var(--ease-out);
 }
 
 /* ===================================
-   SCROLL LABEL
+   SCROLL INDICATOR
 =================================== */
 
 .portfolio-scene-scroll {
   position: absolute;
   z-index: 5;
-  top: 50%;
-  right: clamp(18px, 2vw, 40px);
 
-  color: rgba(255, 255, 255, 0.52);
+  top: 50%;
+  right:
+    clamp(18px, 2vw, 40px);
+
+  color:
+    rgba(255, 255, 255, 0.52);
 
   font-size: 9px;
   font-weight: 600;
@@ -308,37 +326,34 @@
     rotate(180deg);
 }
 
-.portfolio-scene-scroll::before {
+.portfolio-scene-scroll::before,
+.portfolio-scene-scroll::after {
   content: "";
 
-  width: 1px;
-  height: 55px;
-
   position: absolute;
+
   top: calc(100% + 18px);
   left: 50%;
 
-  overflow: hidden;
+  width: 1px;
+}
+
+.portfolio-scene-scroll::before {
+  height: 55px;
 
   background:
     rgba(255, 255, 255, 0.2);
 }
 
 .portfolio-scene-scroll::after {
-  content: "";
-
-  position: absolute;
-  top: calc(100% + 18px);
-  left: 50%;
-
-  width: 1px;
   height: 20px;
 
-  background: var(--accent-pink);
+  background:
+    var(--accent-pink);
 
   animation:
-    portfolio-scroll-line 2s
-    ease-in-out infinite;
+    portfolio-scroll-line
+    2s ease-in-out infinite;
 }
 
 /* ===================================
@@ -356,14 +371,22 @@
     opacity: 0;
 
     transform:
-      translate3d(0, 45px, 0);
+      translate3d(
+        0,
+        42px,
+        0
+      );
   }
 
   to {
     opacity: 1;
 
     transform:
-      translate3d(0, 0, 0);
+      translate3d(
+        0,
+        0,
+        0
+      );
   }
 }
 
@@ -372,14 +395,22 @@
     opacity: 0;
 
     transform:
-      translate3d(0, 22px, 0);
+      translate3d(
+        0,
+        20px,
+        0
+      );
   }
 
   to {
     opacity: 1;
 
     transform:
-      translate3d(0, 0, 0);
+      translate3d(
+        0,
+        0,
+        0
+      );
   }
 }
 
@@ -411,21 +442,25 @@
   .portfolio-scene {
     height: 1400vh;
   }
-}
-
-  .portfolio-scene-interface-inner {
-    padding-top: 120px;
-    padding-bottom: 65px;
-  }
 
   .portfolio-scene-copy {
-    width: min(480px, 54vw);
+    width:
+      min(430px, 42vw);
+
+    transform:
+      translateY(13vh);
+  }
+
+  .portfolio-scene-title {
+    font-size:
+      clamp(42px, 6vw, 70px);
   }
 
   .portfolio-scene-progress {
-    width: min(240px, 30vw);
+    width:
+      min(260px, 31vw);
   }
-
+}
 
 /* ===================================
    MOBILE
@@ -433,63 +468,64 @@
 
 @media (max-width: 640px) {
   .portfolio-scene {
-     height: 1200vh;
+    height: 1200vh;
   }
 
   .portfolio-scene-sticky::before {
     background:
       linear-gradient(
         180deg,
-        rgba(7, 7, 27, 0.45) 0%,
-        transparent 30%,
-        rgba(7, 7, 27, 0.92) 82%,
-        #07071b 100%
+        rgba(5, 5, 21, 0.22)
+          0%,
+        transparent 34%,
+        rgba(5, 5, 21, 0.62)
+          61%,
+        #050515 100%
       );
   }
 
   .portfolio-scene-interface-inner {
     align-items: flex-end;
-    flex-direction: column;
-    justify-content: flex-end;
 
-    gap: 32px;
-
-    padding-top: 100px;
-    padding-bottom: 45px;
+    padding-top: 90px;
+    padding-bottom: 40px;
   }
 
   .portfolio-scene-copy {
     width: 100%;
+
+    transform: none;
   }
 
   .portfolio-scene-label {
-    margin-bottom: 16px;
+    margin-bottom: 15px;
 
     font-size: 9px;
   }
 
   .portfolio-scene-title {
-    max-width: 360px;
+    max-width: 340px;
 
     font-size:
-      clamp(44px, 14vw, 68px);
-
-    line-height: 0.92;
+      clamp(40px, 13vw, 62px);
   }
 
   .portfolio-scene-category {
-    margin-top: 15px;
+    margin-top: 14px;
 
     font-size: 9px;
   }
 
   .portfolio-scene-progress {
-    width: 100%;
+    width:
+      calc(100% - 38px);
+
+    margin-top: 28px;
   }
 
   .portfolio-scene-scroll {
-    top: 48%;
-    right: 12px;
+    top: 43%;
+    right: 11px;
 
     font-size: 8px;
   }
@@ -499,7 +535,9 @@
    REDUCED MOTION
 =================================== */
 
-@media (prefers-reduced-motion: reduce) {
+@media (
+  prefers-reduced-motion: reduce
+) {
   .portfolio-scene-canvas,
   .portfolio-scene-progress-line span {
     transition: none;
