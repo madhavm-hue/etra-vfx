@@ -1,0 +1,682 @@
+/* ===================================
+   CAREER BENEFITS
+=================================== */
+
+.career-benefits {
+  position: relative;
+  isolation: isolate;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  padding-block:
+    var(--section-space);
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      145deg,
+      #241335 0%,
+      #5d194f 48%,
+      #a82368 100%
+    );
+}
+
+/* ===================================
+   BACKGROUND
+=================================== */
+
+.career-benefits-background {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.career-benefits-background::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  opacity: 0.18;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.08)
+        1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.08)
+        1px,
+      transparent 1px
+    );
+
+  background-size:
+    clamp(60px, 6vw, 110px)
+    clamp(60px, 6vw, 110px);
+
+  mask-image:
+    linear-gradient(
+      90deg,
+      transparent,
+      #000 38%,
+      #000 90%
+    );
+}
+
+.career-benefits-glow {
+  position: absolute;
+
+  top: -18%;
+  right: -5%;
+
+  width:
+    clamp(500px, 62vw, 1200px);
+
+  aspect-ratio: 1;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 170, 215, 0.34)
+        0%,
+      rgba(245, 0, 135, 0.14)
+        38%,
+      transparent 70%
+    );
+
+  filter: blur(55px);
+
+  opacity: 0.8;
+}
+
+/* ===================================
+   DECORATIVE CIRCLES
+=================================== */
+
+.career-benefits-circle {
+  position: absolute;
+
+  display: block;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.16);
+
+  border-radius: 50%;
+}
+
+.career-benefits-circle-one {
+  top: -24%;
+  right: -10%;
+
+  width:
+    clamp(580px, 65vw, 1260px);
+
+  aspect-ratio: 1;
+
+  animation:
+    career-benefits-circle-float
+    15s ease-in-out infinite;
+}
+
+.career-benefits-circle-two {
+  right: 16%;
+  bottom: -35%;
+
+  width:
+    clamp(300px, 36vw, 700px);
+
+  aspect-ratio: 1;
+
+  animation:
+    career-benefits-circle-float
+    11s ease-in-out infinite
+    reverse;
+}
+
+/* ===================================
+   INNER
+=================================== */
+
+.career-benefits-inner {
+  position: relative;
+}
+
+/* ===================================
+   HEADER
+=================================== */
+
+.career-benefits-header {
+  margin-bottom:
+    clamp(80px, 11vw, 180px);
+}
+
+.career-benefits-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  margin-bottom:
+    clamp(50px, 7vw, 110px);
+
+  color:
+    rgba(255, 255, 255, 0.7);
+
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.career-benefits-label-line {
+  width:
+    clamp(38px, 4vw, 72px);
+
+  height: 1px;
+
+  background:
+    rgba(255, 255, 255, 0.62);
+}
+
+.career-benefits-heading {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.3fr)
+    minmax(280px, 0.55fr);
+
+  align-items: end;
+
+  gap:
+    clamp(50px, 8vw, 150px);
+}
+
+.career-benefits-title {
+  max-width: 1100px;
+
+  color: #ffffff;
+
+  font-size:
+    clamp(52px, 7vw, 135px);
+
+  font-weight: 500;
+  line-height: 0.87;
+  letter-spacing: -0.07em;
+
+  text-wrap: balance;
+}
+
+.career-benefits-title span {
+  display: block;
+
+  color: transparent;
+
+  -webkit-text-stroke:
+    1.5px
+    rgba(255, 255, 255, 0.74);
+}
+
+.career-benefits-intro {
+  max-width: 480px;
+
+  color:
+    rgba(255, 255, 255, 0.76);
+
+  font-size:
+    clamp(14px, 1vw, 18px);
+
+  line-height: 1.75;
+}
+
+/* ===================================
+   BENEFITS GRID
+=================================== */
+
+.career-benefits-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.2);
+
+  border-left:
+    1px solid
+    rgba(255, 255, 255, 0.2);
+}
+
+/* ===================================
+   BENEFIT CARD
+=================================== */
+
+.career-benefit-card {
+  position: relative;
+  isolation: isolate;
+
+  min-height:
+    clamp(360px, 31vw, 590px);
+
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  padding:
+    clamp(30px, 4vw, 75px);
+
+  overflow: hidden;
+
+  border-right:
+    1px solid
+    rgba(255, 255, 255, 0.2);
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.2);
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  transition:
+    background-color 400ms ease,
+    transform 600ms
+      var(--ease-out);
+}
+
+.career-benefit-card::before {
+  content: "";
+
+  position: absolute;
+  z-index: -1;
+
+  top: 0;
+  right: 0;
+
+  width: 0;
+  height: 0;
+
+  background:
+    rgba(255, 255, 255, 0.11);
+
+  border-radius:
+    0 0 0 100%;
+
+  transition:
+    width 650ms
+      var(--ease-out),
+    height 650ms
+      var(--ease-out);
+}
+
+.career-benefit-card:hover {
+  background:
+    rgba(255, 255, 255, 0.08);
+}
+
+.career-benefit-card:hover::before {
+  width: 140%;
+  height: 140%;
+}
+
+/* ===================================
+   CARD TOP
+=================================== */
+
+.career-benefit-card-top {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.career-benefit-number {
+  color:
+    rgba(255, 255, 255, 0.68);
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+
+.career-benefit-icon {
+  width: 48px;
+  height: 48px;
+
+  display: grid;
+  place-items: center;
+
+  color: #ffffff;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.34);
+
+  border-radius: 50%;
+
+  transition:
+    color 350ms ease,
+    background-color 350ms ease,
+    border-color 350ms ease,
+    transform 550ms
+      var(--ease-out);
+}
+
+.career-benefit-icon svg {
+  width: 17px;
+  height: 17px;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.career-benefit-card:hover
+  .career-benefit-icon {
+  color: #7b185c;
+  background: #ffffff;
+  border-color: #ffffff;
+
+  transform: rotate(45deg);
+}
+
+/* ===================================
+   CARD CONTENT
+=================================== */
+
+.career-benefit-card-content {
+  position: relative;
+  z-index: 2;
+
+  max-width: 560px;
+}
+
+.career-benefit-title {
+  color: #ffffff;
+
+  font-size:
+    clamp(32px, 3.6vw, 68px);
+
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+
+  transition:
+    transform 550ms
+      var(--ease-out);
+}
+
+.career-benefit-card:hover
+  .career-benefit-title {
+  transform:
+    translateY(-8px);
+}
+
+.career-benefit-description {
+  max-width: 470px;
+
+  margin-top:
+    clamp(24px, 3vw, 42px);
+
+  color:
+    rgba(255, 255, 255, 0.72);
+
+  font-size:
+    clamp(14px, 0.95vw, 17px);
+
+  line-height: 1.75;
+
+  transition:
+    color 350ms ease,
+    transform 550ms
+      var(--ease-out);
+}
+
+.career-benefit-card:hover
+  .career-benefit-description {
+  color:
+    rgba(255, 255, 255, 0.92);
+
+  transform:
+    translateY(-8px);
+}
+
+/* ===================================
+   DECORATIVE CORNER
+=================================== */
+
+.career-benefit-corner {
+  position: absolute;
+
+  right: -85px;
+  bottom: -85px;
+
+  width: 180px;
+  height: 180px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.13);
+
+  border-radius: 50%;
+
+  transition:
+    width 600ms
+      var(--ease-out),
+    height 600ms
+      var(--ease-out),
+    right 600ms
+      var(--ease-out),
+    bottom 600ms
+      var(--ease-out);
+}
+
+.career-benefit-card:hover
+  .career-benefit-corner {
+  right: -55px;
+  bottom: -55px;
+
+  width: 230px;
+  height: 230px;
+}
+
+/* ===================================
+   BACKGROUND NUMBER
+=================================== */
+
+.career-benefit-hover-background {
+  position: absolute;
+
+  right: -0.03em;
+  bottom: -0.2em;
+
+  color: transparent;
+
+  font-size:
+    clamp(170px, 20vw, 390px);
+
+  font-weight: 700;
+  line-height: 0.8;
+  letter-spacing: -0.08em;
+
+  -webkit-text-stroke:
+    1px
+    rgba(255, 255, 255, 0.09);
+
+  opacity: 0;
+
+  transform:
+    translateY(30px);
+
+  transition:
+    opacity 500ms ease,
+    transform 650ms
+      var(--ease-out);
+
+  user-select: none;
+}
+
+.career-benefit-card:hover
+  .career-benefit-hover-background {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+}
+
+/* ===================================
+   ANIMATION
+=================================== */
+
+@keyframes career-benefits-circle-float {
+  0%,
+  100% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      translate3d(
+        -28px,
+        24px,
+        0
+      )
+      scale(1.05);
+  }
+}
+
+/* ===================================
+   TABLET
+=================================== */
+
+@media (max-width: 1024px) {
+  .career-benefits-heading {
+    grid-template-columns: 1fr;
+
+    align-items: start;
+
+    gap: 45px;
+  }
+
+  .career-benefits-intro {
+    max-width: 620px;
+  }
+
+  .career-benefit-card {
+    min-height: 420px;
+  }
+}
+
+/* ===================================
+   MOBILE
+=================================== */
+
+@media (max-width: 640px) {
+  .career-benefits {
+    padding-block: 85px;
+  }
+
+  .career-benefits-header {
+    margin-bottom: 70px;
+  }
+
+  .career-benefits-label {
+    gap: 10px;
+
+    margin-bottom: 55px;
+
+    font-size: 8px;
+  }
+
+  .career-benefits-heading {
+    gap: 35px;
+  }
+
+  .career-benefits-title {
+    font-size:
+      clamp(48px, 15vw, 72px);
+
+    line-height: 0.9;
+  }
+
+  .career-benefits-intro {
+    font-size: 14px;
+  }
+
+  .career-benefits-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .career-benefit-card {
+    min-height: 370px;
+
+    padding: 28px 24px;
+  }
+
+  .career-benefit-title {
+    font-size:
+      clamp(32px, 10vw, 48px);
+  }
+
+  .career-benefit-description {
+    margin-top: 24px;
+
+    font-size: 14px;
+  }
+
+  .career-benefit-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .career-benefits-circle-one {
+    top: -5%;
+    right: -100%;
+
+    width: 190vw;
+  }
+
+  .career-benefits-circle-two {
+    right: -70%;
+    bottom: 5%;
+
+    width: 140vw;
+  }
+}
+
+/* ===================================
+   REDUCED MOTION
+=================================== */
+
+@media (
+  prefers-reduced-motion: reduce
+) {
+  .career-benefits-circle {
+    animation: none;
+  }
+
+  .career-benefit-card,
+  .career-benefit-card::before,
+  .career-benefit-icon,
+  .career-benefit-title,
+  .career-benefit-description,
+  .career-benefit-corner,
+  .career-benefit-hover-background {
+    transition: none;
+  }
+}

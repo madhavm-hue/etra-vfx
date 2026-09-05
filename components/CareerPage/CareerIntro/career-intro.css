@@ -1,0 +1,557 @@
+/* ===================================
+   CAREER INTRO
+=================================== */
+
+.career-intro {
+  position: relative;
+  isolation: isolate;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  padding-block:
+    var(--section-space);
+
+  color: var(--text-primary);
+  background: var(--surface);
+}
+
+/* ===================================
+   BACKGROUND
+=================================== */
+
+.career-intro-background {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.career-intro-background::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  opacity: 0.24;
+
+  background-image:
+    linear-gradient(
+      var(--border) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      var(--border) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    clamp(60px, 6vw, 110px)
+    clamp(60px, 6vw, 110px);
+
+  mask-image:
+    linear-gradient(
+      90deg,
+      transparent,
+      #000 35%,
+      #000 82%,
+      transparent
+    );
+}
+
+.career-intro-glow {
+  position: absolute;
+
+  top: 5%;
+  left: 30%;
+
+  width:
+    clamp(360px, 48vw, 900px);
+
+  aspect-ratio: 1;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      color-mix(
+        in srgb,
+        var(--accent-purple) 16%,
+        transparent
+      ),
+      color-mix(
+        in srgb,
+        var(--accent-pink) 8%,
+        transparent
+      ) 36%,
+      transparent 70%
+    );
+
+  filter: blur(45px);
+
+  opacity: 0.75;
+}
+
+/* ===================================
+   DECORATIVE CIRCLES
+=================================== */
+
+.career-intro-circle {
+  position: absolute;
+
+  display: block;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--accent-pink) 20%,
+      transparent
+    );
+
+  border-radius: 50%;
+
+  opacity: 0.8;
+}
+
+.career-intro-circle-one {
+  top: -34%;
+  left: -13%;
+
+  width:
+    clamp(500px, 54vw, 1020px);
+
+  aspect-ratio: 1;
+
+  animation:
+    career-intro-circle-float
+    15s ease-in-out infinite;
+}
+
+.career-intro-circle-two {
+  right: -8%;
+  bottom: -32%;
+
+  width:
+    clamp(300px, 36vw, 700px);
+
+  aspect-ratio: 1;
+
+  animation:
+    career-intro-circle-float
+    11s ease-in-out infinite
+    reverse;
+}
+
+/* ===================================
+   INNER
+=================================== */
+
+.career-intro-inner {
+  position: relative;
+}
+
+/* ===================================
+   SECTION LABEL
+=================================== */
+
+.career-intro-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  margin-bottom:
+    clamp(65px, 9vw, 150px);
+
+  color: var(--text-secondary);
+
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.career-intro-label-line {
+  width:
+    clamp(36px, 4vw, 72px);
+
+  height: 1px;
+
+  background:
+    var(--accent-pink);
+}
+
+/* ===================================
+   MAIN CONTENT
+=================================== */
+
+.career-intro-content {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.35fr)
+    minmax(300px, 0.65fr);
+
+  align-items: end;
+
+  gap:
+    clamp(60px, 9vw, 180px);
+}
+
+.career-intro-heading-group {
+  min-width: 0;
+}
+
+.career-intro-title {
+  max-width: 1100px;
+
+  color: var(--text-primary);
+
+  font-size:
+    clamp(52px, 7vw, 135px);
+
+  font-weight: 500;
+  line-height: 0.88;
+  letter-spacing: -0.07em;
+
+  text-wrap: balance;
+}
+
+.career-intro-title span {
+  display: block;
+
+  color: var(--accent-pink);
+}
+
+.career-intro-copy {
+  max-width: 540px;
+
+  padding-bottom:
+    clamp(3px, 1vw, 18px);
+}
+
+.career-intro-lead {
+  color: var(--text-primary);
+
+  font-size:
+    clamp(20px, 1.6vw, 30px);
+
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.025em;
+}
+
+.career-intro-description {
+  margin-top: 26px;
+
+  color: var(--text-secondary);
+
+  font-size:
+    clamp(14px, 0.95vw, 18px);
+
+  line-height: 1.75;
+}
+
+/* ===================================
+   STATISTICS
+=================================== */
+
+.career-intro-stats {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  margin-top:
+    clamp(90px, 12vw, 190px);
+
+  border-top:
+    1px solid var(--border);
+
+  border-bottom:
+    1px solid var(--border);
+}
+
+.career-intro-stat {
+  position: relative;
+
+  min-height:
+    clamp(220px, 20vw, 370px);
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  flex-direction: column;
+
+  padding:
+    clamp(28px, 3vw, 55px);
+
+  overflow: hidden;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--surface) 88%,
+      transparent
+    );
+
+  transition:
+    color 400ms ease,
+    background-color 400ms ease;
+}
+
+.career-intro-stat:not(
+  :last-child
+) {
+  border-right:
+    1px solid var(--border);
+}
+
+.career-intro-stat::before {
+  content: "";
+
+  position: absolute;
+  inset: auto 0 0;
+
+  height: 0;
+
+  background:
+    var(--accent-pink);
+
+  transition:
+    height 500ms
+    var(--ease-out);
+}
+
+.career-intro-stat:hover::before {
+  height: 100%;
+}
+
+.career-intro-stat > * {
+  position: relative;
+  z-index: 1;
+}
+
+.career-intro-stat-number {
+  position: absolute;
+  top:
+    clamp(22px, 2vw, 36px);
+  left:
+    clamp(25px, 3vw, 52px);
+
+  color: var(--text-secondary);
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+
+  transition:
+    color 350ms ease;
+}
+
+.career-intro-stat-value {
+  display: block;
+
+  color: var(--text-primary);
+
+  font-size:
+    clamp(55px, 6vw, 115px);
+
+  font-weight: 500;
+  line-height: 0.85;
+  letter-spacing: -0.07em;
+
+  transition:
+    color 350ms ease,
+    transform 500ms
+      var(--ease-out);
+}
+
+.career-intro-stat-label {
+  margin-top: 24px;
+
+  color: var(--text-secondary);
+
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  transition:
+    color 350ms ease;
+}
+
+.career-intro-stat:hover
+  .career-intro-stat-number,
+.career-intro-stat:hover
+  .career-intro-stat-value,
+.career-intro-stat:hover
+  .career-intro-stat-label {
+  color: #ffffff;
+}
+
+.career-intro-stat:hover
+  .career-intro-stat-value {
+  transform:
+    translateY(-8px);
+}
+
+/* ===================================
+   ANIMATION
+=================================== */
+
+@keyframes career-intro-circle-float {
+  0%,
+  100% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      translate3d(
+        30px,
+        -22px,
+        0
+      )
+      scale(1.05);
+  }
+}
+
+/* ===================================
+   TABLET
+=================================== */
+
+@media (max-width: 1024px) {
+  .career-intro-content {
+    grid-template-columns: 1fr;
+
+    align-items: start;
+
+    gap: 60px;
+  }
+
+  .career-intro-title {
+    max-width: 850px;
+  }
+
+  .career-intro-copy {
+    max-width: 650px;
+
+    padding-bottom: 0;
+  }
+
+  .career-intro-stats {
+    margin-top: 110px;
+  }
+}
+
+/* ===================================
+   MOBILE
+=================================== */
+
+@media (max-width: 640px) {
+  .career-intro {
+    padding-block: 85px;
+  }
+
+  .career-intro-label {
+    gap: 10px;
+
+    margin-bottom: 60px;
+
+    font-size: 8px;
+  }
+
+  .career-intro-content {
+    gap: 42px;
+  }
+
+  .career-intro-title {
+    font-size:
+      clamp(48px, 15vw, 72px);
+
+    line-height: 0.9;
+  }
+
+  .career-intro-lead {
+    font-size: 20px;
+  }
+
+  .career-intro-description {
+    margin-top: 20px;
+
+    font-size: 14px;
+  }
+
+  .career-intro-stats {
+    grid-template-columns: 1fr;
+
+    margin-top: 75px;
+  }
+
+  .career-intro-stat {
+    min-height: 230px;
+
+    padding: 30px 25px;
+  }
+
+  .career-intro-stat:not(
+    :last-child
+  ) {
+    border-right: 0;
+
+    border-bottom:
+      1px solid var(--border);
+  }
+
+  .career-intro-stat-number {
+    top: 24px;
+    left: 25px;
+  }
+
+  .career-intro-stat-value {
+    font-size:
+      clamp(58px, 20vw, 85px);
+  }
+
+  .career-intro-circle-one {
+    top: -10%;
+    left: -95%;
+
+    width: 175vw;
+  }
+
+  .career-intro-circle-two {
+    right: -65%;
+    bottom: 3%;
+
+    width: 130vw;
+  }
+}
+
+/* ===================================
+   REDUCED MOTION
+=================================== */
+
+@media (
+  prefers-reduced-motion: reduce
+) {
+  .career-intro-circle {
+    animation: none;
+  }
+
+  .career-intro-stat,
+  .career-intro-stat::before,
+  .career-intro-stat-number,
+  .career-intro-stat-value,
+  .career-intro-stat-label {
+    transition: none;
+  }
+}

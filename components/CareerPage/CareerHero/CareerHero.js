@@ -51,7 +51,7 @@ export default function CareerHero() {
           animate="visible"
         >
           <div className="career-hero-label">
-            <span>01</span>
+            <span></span>
 
             <span className="career-hero-label-line" />
 
@@ -113,7 +113,7 @@ export default function CareerHero() {
           className="career-hero-scroll"
           aria-hidden="true"
         >
-          <span>Scroll to discover</span>
+          <span>Scroll to Explore</span>
 
           <span className="career-hero-scroll-line" />
         </div>
