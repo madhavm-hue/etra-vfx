@@ -40,6 +40,10 @@ const navLinks = [
     href: "/team",
   },
   {
+    label: "Careers",
+    href: "/career",
+  },
+  {
     label: "Contact",
     href: "/contact",
   },

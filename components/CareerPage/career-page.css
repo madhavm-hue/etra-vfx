@@ -1,0 +1,14 @@
+.career-page {
+  position: relative;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  color: var(--text-primary);
+  background: var(--background);
+}
+
+.career-page section {
+  position: relative;
+}

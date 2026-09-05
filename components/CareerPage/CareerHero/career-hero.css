@@ -1,0 +1,522 @@
+/* ===================================
+   CAREER HERO
+=================================== */
+
+.career-hero {
+  position: relative;
+  isolation: isolate;
+
+  width: 100%;
+  min-height: 100svh;
+
+  overflow: hidden;
+
+  color: var(--text-primary);
+  background: var(--background);
+}
+
+/* ===================================
+   BACKGROUND
+=================================== */
+
+.career-hero-background {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.career-hero-glow {
+  position: absolute;
+
+  top: 8%;
+  right: 6%;
+
+  width:
+    clamp(360px, 48vw, 920px);
+
+  aspect-ratio: 1;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      color-mix(
+        in srgb,
+        var(--accent-pink) 24%,
+        transparent
+      ),
+      transparent 68%
+    );
+
+  filter: blur(30px);
+
+  opacity: 0.75;
+}
+
+.career-hero-grid {
+  position: absolute;
+  inset: 0;
+
+  opacity: 0.22;
+
+  background-image:
+    linear-gradient(
+      var(--border) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      var(--border) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    clamp(55px, 5vw, 95px)
+    clamp(55px, 5vw, 95px);
+
+  mask-image:
+    linear-gradient(
+      90deg,
+      transparent,
+      #000 42%,
+      #000 82%,
+      transparent
+    );
+}
+
+/* ===================================
+   ORBITS
+=================================== */
+
+.career-hero-orbit {
+  position: absolute;
+
+  display: block;
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--accent-pink) 30%,
+      transparent
+    );
+
+  border-radius: 50%;
+}
+
+.career-hero-orbit-one {
+  top: -28%;
+  right: -8%;
+
+  width:
+    clamp(520px, 62vw, 1180px);
+
+  aspect-ratio: 1;
+
+  animation:
+    career-orbit-float
+    14s ease-in-out infinite;
+}
+
+.career-hero-orbit-two {
+  top: 16%;
+  right: 8%;
+
+  width:
+    clamp(280px, 34vw, 680px);
+
+  aspect-ratio: 1;
+
+  animation:
+    career-orbit-float
+    10s ease-in-out infinite
+    reverse;
+}
+
+/* ===================================
+   INNER
+=================================== */
+
+.career-hero-inner {
+  position: relative;
+
+  min-height: 100svh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding-top:
+    clamp(145px, 18vh, 230px);
+
+  padding-bottom:
+    clamp(50px, 7vh, 90px);
+}
+
+/* ===================================
+   TOP
+=================================== */
+
+.career-hero-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 50px;
+}
+
+.career-hero-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  color: var(--text-secondary);
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.career-hero-label-line {
+  width:
+    clamp(35px, 4vw, 70px);
+
+  height: 1px;
+
+  background:
+    var(--accent-pink);
+}
+
+.career-hero-intro {
+  max-width: 430px;
+
+  color: var(--text-secondary);
+
+  font-size:
+    clamp(14px, 1vw, 18px);
+
+  line-height: 1.7;
+}
+
+/* ===================================
+   CONTENT
+=================================== */
+
+.career-hero-content {
+  padding-block:
+    clamp(70px, 10vh, 150px);
+}
+
+.career-hero-title {
+  max-width: 1350px;
+
+  color: var(--text-primary);
+
+  font-size:
+    clamp(72px, 11vw, 205px);
+
+  font-weight: 500;
+  line-height: 0.8;
+  letter-spacing: -0.075em;
+
+  text-wrap: balance;
+}
+
+.career-hero-title span {
+  display: block;
+
+  color: var(--accent-pink);
+}
+
+.career-hero-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 50px;
+
+  margin-top:
+    clamp(55px, 8vh, 110px);
+}
+
+.career-hero-description {
+  max-width: 520px;
+
+  color: var(--text-secondary);
+
+  font-size:
+    clamp(15px, 1.1vw, 20px);
+
+  line-height: 1.65;
+}
+
+/* ===================================
+   CTA
+=================================== */
+
+.career-hero-link {
+  min-height: 58px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+
+  flex-shrink: 0;
+
+  padding:
+    7px 7px 7px 24px;
+
+  color: var(--text-primary);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--surface) 86%,
+      transparent
+    );
+
+  border: 1px solid
+    var(--border);
+
+  border-radius: 999px;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  transition:
+    color 300ms ease,
+    background-color 300ms ease,
+    border-color 300ms ease,
+    transform 450ms var(--ease-out);
+}
+
+.career-hero-link-icon {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  color: #ffffff;
+  background: var(--accent-pink);
+
+  border-radius: 50%;
+
+  transition:
+    color 300ms ease,
+    background-color 300ms ease,
+    transform 450ms var(--ease-out);
+}
+
+.career-hero-link-icon svg {
+  width: 17px;
+  height: 17px;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.career-hero-link:hover {
+  color: #ffffff;
+  background: var(--accent-pink);
+  border-color: var(--accent-pink);
+
+  transform: translateY(-4px);
+}
+
+.career-hero-link:hover
+  .career-hero-link-icon {
+  color: var(--accent-pink);
+  background: #ffffff;
+
+  transform: translateY(3px);
+}
+
+/* ===================================
+   SCROLL INDICATOR
+=================================== */
+
+.career-hero-scroll {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  color: var(--text-secondary);
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.career-hero-scroll-line {
+  position: relative;
+
+  width: 70px;
+  height: 1px;
+
+  overflow: hidden;
+
+  background: var(--border);
+}
+
+.career-hero-scroll-line::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    var(--accent-pink);
+
+  animation:
+    career-scroll-line
+    2.2s ease-in-out infinite;
+}
+
+/* ===================================
+   ANIMATIONS
+=================================== */
+
+@keyframes career-orbit-float {
+  0%,
+  100% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      translate3d(-30px, 24px, 0)
+      scale(1.04);
+  }
+}
+
+@keyframes career-scroll-line {
+  0% {
+    transform:
+      translateX(-100%);
+  }
+
+  50%,
+  100% {
+    transform:
+      translateX(100%);
+  }
+}
+
+/* ===================================
+   TABLET
+=================================== */
+
+@media (max-width: 1024px) {
+  .career-hero-top,
+  .career-hero-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .career-hero-title {
+    font-size:
+      clamp(70px, 13vw, 130px);
+  }
+}
+
+/* ===================================
+   MOBILE
+=================================== */
+
+@media (max-width: 640px) {
+  .career-hero-inner {
+    min-height: 100svh;
+
+    padding-top: 120px;
+    padding-bottom: 38px;
+  }
+
+  .career-hero-top {
+    gap: 30px;
+  }
+
+  .career-hero-intro {
+    max-width: 330px;
+
+    font-size: 14px;
+  }
+
+  .career-hero-content {
+    padding-block:
+      60px 45px;
+  }
+
+  .career-hero-title {
+    font-size:
+      clamp(58px, 18vw, 90px);
+
+    line-height: 0.84;
+  }
+
+  .career-hero-bottom {
+    gap: 34px;
+
+    margin-top: 48px;
+  }
+
+  .career-hero-description {
+    font-size: 15px;
+  }
+
+  .career-hero-link {
+    width: 100%;
+
+    justify-content:
+      space-between;
+  }
+
+  .career-hero-orbit-one {
+    top: 5%;
+    right: -90%;
+
+    width: 180vw;
+  }
+
+  .career-hero-orbit-two {
+    top: 24%;
+    right: -42%;
+
+    width: 100vw;
+  }
+
+  .career-hero-grid {
+    background-size:
+      45px 45px;
+  }
+}
+
+/* ===================================
+   REDUCED MOTION
+=================================== */
+
+@media (
+  prefers-reduced-motion: reduce
+) {
+  .career-hero-orbit,
+  .career-hero-scroll-line::after {
+    animation: none;
+  }
+
+  .career-hero-link,
+  .career-hero-link-icon {
+    transition: none;
+  }
+}
