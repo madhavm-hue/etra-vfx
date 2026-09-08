@@ -8,12 +8,6 @@ import "./intro.css";
 const INTRO_DURATION = 4.8;
 const INTRO_HOLD_DELAY = 700;
 
-/*
-  Browser refresh panna indha value false-ah reset aagum.
-
-  Same browser load-la Services/Portfolio poi Home return
-  pannina true-ah retain aagum. Adhanala intro repeat aagadhu.
-*/
 let introHasPlayedDuringThisLoad = false;
 
 export default function Intro() {

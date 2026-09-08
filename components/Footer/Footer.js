@@ -32,15 +32,43 @@ const footerNavigation = [
 
 const footerServices = [
   {
-    label: "Rotoscopy & Keying",
+    label: "Rotoscopy & Prep",
     href: "/services",
   },
   {
-    label: "Paint & Prep",
+    label: "Keying & Mattes",
     href: "/services",
   },
   {
-    label: "Matchmove & Rotomation",
+    label: "Paint / Prep / Cleanup",
+    href: "/services",
+  },
+  {
+    label: "Matchmove & Tracking",
+    href: "/services",
+  },
+  {
+    label: "Compositing",
+    href: "/services",
+  },
+  {
+    label: "3D Assets & Digidoubles",
+    href: "/services",
+  },
+  {
+    label: "Environments & DMP",
+    href: "/services",
+  },
+  {
+    label: "Lighting & Rendering",
+    href: "/services",
+  },
+  {
+    label: "Creature FX (CFX)",
+    href: "/services",
+  },
+  {
+    label: "FX & Dynamics",
     href: "/services",
   },
 ];

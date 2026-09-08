@@ -1,56 +1,150 @@
+/* ===================================
+   SERVICES — SCROLL RIBBON
+=================================== */
+
 .services-showcase {
   position: relative;
+  isolation: isolate;
 
   width: 100%;
-  padding-block:
-    clamp(90px, 9vw, 170px)
-    clamp(70px, 7vw, 130px);
-
-  overflow: hidden;
+  height: 720vh;
 
   color: var(--text-primary);
   background: var(--bg-primary);
 }
 
-/* SECTION HEADING */
+.services-sticky {
+  position: sticky;
+  top: 0;
+
+  width: 100%;
+  height: 100svh;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 72% 45%,
+      color-mix(
+        in srgb,
+        var(--accent-purple) 13%,
+        transparent
+      ),
+      transparent 38%
+    ),
+    var(--bg-primary);
+}
+
+/* ===================================
+   AMBIENT BACKGROUND
+=================================== */
+
+.services-ambient {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.services-orb {
+  position: absolute;
+
+  display: block;
+
+  border-radius: 50%;
+
+  filter: blur(110px);
+  opacity: 0.18;
+}
+
+.services-orb-one {
+  top: 15%;
+  right: 9%;
+
+  width: min(34vw, 600px);
+  aspect-ratio: 1;
+
+  background: var(--accent-pink);
+
+  animation:
+    services-orb-float
+    9s ease-in-out infinite;
+}
+
+.services-orb-two {
+  bottom: 4%;
+  left: 20%;
+
+  width: min(26vw, 460px);
+  aspect-ratio: 1;
+
+  background: var(--accent-purple);
+
+  animation:
+    services-orb-float
+    12s ease-in-out infinite reverse;
+}
+
+/* ===================================
+   HEADING
+=================================== */
 
 .services-heading {
-  margin-bottom: clamp(36px, 5vw, 74px);
+  position: relative;
+  z-index: 5;
+
+  min-height: clamp(230px, 31vh, 360px);
 
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
 
   gap: 48px;
+
+  padding-top:
+    clamp(105px, 13vh, 150px);
+
+  padding-bottom:
+    clamp(28px, 4vh, 52px);
 }
 
 .services-heading-copy {
-  max-width: 900px;
+  max-width: 760px;
 }
 
 .services-eyebrow {
-  margin-bottom: 20px;
+  margin-bottom: 17px;
 
   color: var(--accent-pink);
 
-  font-size: 12px;
-  font-weight: 900;
+  font-size: 11px;
+  font-weight: 800;
   line-height: 1;
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
 .services-title {
-  max-width: 820px;
+  max-width: 720px;
 
-  font-size: clamp(48px, 6vw, 104px);
-  font-weight: 900;
+  font-size:
+    clamp(44px, 5vw, 88px);
+
+  font-weight: 800;
   line-height: 0.92;
   letter-spacing: -0.055em;
+
   text-wrap: balance;
 }
 
-/* VIEW ALL CTA */
+/* ===================================
+   VIEW ALL
+=================================== */
 
 .services-view-all {
   min-width: max-content;
@@ -60,21 +154,23 @@
   justify-content: center;
 
   gap: 28px;
-  padding: 15px 0;
+
+  padding-block: 15px;
 
   color: var(--text-primary);
-  border-bottom: 1px solid var(--text-primary);
+  border-bottom:
+    1px solid var(--text-primary);
 
-  font-size: 11px;
-  font-weight: 900;
+  font-size: 10px;
+  font-weight: 800;
   line-height: 1;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
 
   transition:
+    gap 400ms var(--ease-out),
     color 250ms ease,
-    border-color 250ms ease,
-    gap 400ms var(--ease-out);
+    border-color 250ms ease;
 }
 
 .services-view-all:hover {
@@ -84,63 +180,177 @@
   border-color: var(--accent-pink);
 }
 
-/* THREE-COLUMN SHOWCASE */
+/* ===================================
+   RIBBON VIEWPORT
+=================================== */
 
-.services-grid {
+.services-ribbon-window {
+  position: relative;
+  z-index: 2;
+
+  flex: 1;
   width: 100%;
-  height: clamp(540px, 66vw, 830px);
 
   display: flex;
+  align-items: center;
 
-  padding-inline: var(--page-padding);
-  gap: clamp(8px, 1vw, 18px);
+  overflow: visible;
+  perspective: 1500px;
 }
 
-.service-card {
+.services-ribbon-window::before,
+.services-ribbon-window::after {
+  content: "";
+
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  bottom: 0;
+
+  width: 10vw;
+
+  pointer-events: none;
+}
+
+.services-ribbon-window::before {
+  left: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--bg-primary),
+      transparent
+    );
+}
+
+.services-ribbon-window::after {
+  right: 0;
+
+  background:
+    linear-gradient(
+      -90deg,
+      var(--bg-primary),
+      transparent
+    );
+}
+
+.services-ribbon-track {
   position: relative;
 
-  min-width: 0;
-  flex: 1 1 0;
+  width: max-content;
+
+  display: flex;
+  align-items: center;
+
+  gap: clamp(18px, 2vw, 38px);
+
+  padding-inline: 5vw;
+
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* ===================================
+   RIBBON CARD
+=================================== */
+
+.service-ribbon-card {
+  position: relative;
+
+  width: clamp(280px, 29vw, 470px);
+  height: clamp(350px, 48vh, 600px);
+
+  flex: 0 0 auto;
 
   overflow: hidden;
 
-  background: var(--bg-secondary);
+  background: #0d0b22;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.13);
+
+  border-radius:
+    clamp(18px, 1.6vw, 30px);
+
+  box-shadow:
+    0 38px 90px rgba(0, 0, 0, 0.3);
+
+  transform-style: preserve-3d;
+  transform-origin: center;
+
+  will-change:
+    transform,
+    opacity;
 
   transition:
-    flex-grow 700ms var(--ease-out),
-    opacity 500ms ease;
+    border-color 400ms ease,
+    box-shadow 500ms ease;
 }
 
-.services-grid.has-active-service
-  .service-card {
-  flex-grow: 0.78;
-  opacity: 0.72;
+.service-ribbon-card::before {
+  content: "";
+
+  position: absolute;
+  z-index: 6;
+  inset: 0;
+
+  pointer-events: none;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      125deg,
+      rgba(255, 255, 255, 0.2),
+      transparent 20%,
+      transparent 72%,
+      rgba(245, 0, 135, 0.15)
+    );
+
+  opacity: 0.55;
 }
 
-.services-grid.has-active-service
-  .service-card.is-active {
-  flex-grow: 1.5;
-  opacity: 1;
+.service-ribbon-card.is-active {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--accent-pink) 62%,
+      transparent
+    );
+
+  box-shadow:
+    0 45px 110px rgba(0, 0, 0, 0.42),
+    0 0 52px
+      color-mix(
+        in srgb,
+        var(--accent-pink) 19%,
+        transparent
+      );
 }
 
-.service-card-link {
+.service-ribbon-link {
   position: absolute;
   inset: 0;
 
   display: block;
 
   overflow: hidden;
+  border-radius: inherit;
 }
 
-/* IMAGE / GIF */
+/* ===================================
+   MEDIA
+=================================== */
 
-.service-media {
+.service-ribbon-media {
   position: absolute;
   inset: 0;
+
+  overflow: hidden;
 }
 
-.service-image,
-.service-gif {
+.service-ribbon-image,
+.service-ribbon-gif {
   width: 100%;
   height: 100%;
 
@@ -148,118 +358,139 @@
   object-position: center;
 
   transition:
-    opacity 350ms ease,
-    transform 900ms var(--ease-out),
-    filter 500ms ease;
+    transform 1s var(--ease-out),
+    filter 600ms ease,
+    opacity 350ms ease;
 }
 
-.service-image {
+.service-ribbon-image {
   z-index: 1;
 
-  filter: saturate(0.8) contrast(1.03);
-  transform: scale(1.015);
+  filter:
+    saturate(0.72)
+    contrast(1.08)
+    brightness(0.78);
+
+  transform: scale(1.045);
 }
 
-.service-gif {
+.service-ribbon-gif {
   z-index: 2;
 
-  opacity: 0;
-
   animation:
-    service-gif-reveal
-    350ms ease forwards;
+    service-ribbon-gif-reveal
+    400ms ease both;
 }
 
-@keyframes service-gif-reveal {
-  to {
-    opacity: 1;
-  }
+.service-ribbon-card.is-active
+  .service-ribbon-image {
+  filter:
+    saturate(1)
+    contrast(1.05)
+    brightness(0.92);
 }
 
-.service-card.is-active
-  .service-image,
-.service-card.is-active
-  .service-gif {
-  transform: scale(1.06);
+.service-ribbon-card:hover
+  .service-ribbon-image,
+.service-ribbon-card:hover
+  .service-ribbon-gif {
+  transform: scale(1.09);
 }
 
-/* CARD OVERLAYS */
+/* ===================================
+   CARD EFFECTS
+=================================== */
 
-.service-card-shade {
+.service-ribbon-overlay {
   position: absolute;
-  inset: 0;
   z-index: 3;
+  inset: 0;
 
   pointer-events: none;
 
   background:
     linear-gradient(
       180deg,
-      rgba(7, 7, 27, 0.38) 0%,
-      rgba(7, 7, 27, 0.02) 42%,
-      rgba(7, 7, 27, 0.88) 100%
+      rgba(7, 7, 27, 0.3) 0%,
+      transparent 38%,
+      rgba(7, 7, 27, 0.93) 100%
     );
-
-  transition: background 500ms ease;
 }
 
-.service-card.is-active
-  .service-card-shade {
+.service-ribbon-glass {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+
+  pointer-events: none;
+
   background:
     linear-gradient(
-      180deg,
-      rgba(7, 7, 27, 0.2) 0%,
-      rgba(7, 7, 27, 0) 40%,
-      rgba(7, 7, 27, 0.82) 100%
+      110deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.11) 43%,
+      transparent 58%
     );
+
+  transform: translateX(-130%);
+
+  transition:
+    transform 900ms var(--ease-out);
 }
 
-/* CARD TOP */
+.service-ribbon-card:hover
+  .service-ribbon-glass {
+  transform: translateX(130%);
+}
 
-.service-card-top {
+/* ===================================
+   CARD TOP
+=================================== */
+
+.service-ribbon-top {
   position: absolute;
-  top: clamp(20px, 2vw, 34px);
-  right: clamp(20px, 2vw, 34px);
-  left: clamp(20px, 2vw, 34px);
-  z-index: 4;
+  z-index: 7;
+
+  top: clamp(20px, 2vw, 32px);
+  right: clamp(20px, 2vw, 32px);
+  left: clamp(20px, 2vw, 32px);
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   color: #ffffff;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.17em;
 }
 
-.service-number {
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 0.18em;
-}
-
-.service-arrow {
+.service-ribbon-arrow {
   width: 42px;
   height: 42px;
 
   display: grid;
   place-items: center;
 
-  border: 1px solid
-    rgba(255, 255, 255, 0.5);
+  border:
+    1px solid rgba(255, 255, 255, 0.45);
+
   border-radius: 50%;
 
   font-size: 17px;
 
-  transform: rotate(0deg);
-
   transition:
-    color 350ms ease,
-    background-color 350ms ease,
-    border-color 350ms ease,
-    transform 500ms var(--ease-out);
+    transform 450ms var(--ease-out),
+    color 300ms ease,
+    background-color 300ms ease,
+    border-color 300ms ease;
 }
 
-.service-card.is-active
-  .service-arrow {
+.service-ribbon-card:hover
+  .service-ribbon-arrow,
+.service-ribbon-card.is-active
+  .service-ribbon-arrow {
   color: #ffffff;
   background: var(--accent-pink);
   border-color: var(--accent-pink);
@@ -267,39 +498,58 @@
   transform: rotate(45deg);
 }
 
-/* CARD CONTENT */
+/* ===================================
+   CARD CONTENT
+=================================== */
 
-.service-card-content {
+.service-ribbon-content {
   position: absolute;
-  right: clamp(20px, 2.4vw, 42px);
-  bottom: clamp(24px, 3vw, 48px);
-  left: clamp(20px, 2.4vw, 42px);
-  z-index: 4;
+  z-index: 7;
+
+  right: clamp(22px, 2.5vw, 40px);
+  bottom: clamp(24px, 3vw, 46px);
+  left: clamp(22px, 2.5vw, 40px);
 
   color: #ffffff;
 }
 
-.service-name {
-  max-width: 520px;
+.service-ribbon-content > p {
+  margin-bottom: 12px;
 
-  font-size: clamp(27px, 2.4vw, 48px);
-  font-weight: 900;
-  line-height: 0.98;
-  letter-spacing: -0.04em;
+  color: rgba(255, 255, 255, 0.65);
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.service-ribbon-content h3 {
+  max-width: 390px;
+
+  font-size:
+    clamp(30px, 2.7vw, 48px);
+
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+
   text-wrap: balance;
 
   transition:
-    transform 600ms var(--ease-out);
+    transform 500ms var(--ease-out);
 }
 
-.service-card.is-active
-  .service-name {
-  transform: translateY(-10px);
+.service-ribbon-card:hover
+  .service-ribbon-content h3 {
+  transform: translateY(-7px);
 }
 
-.service-learn-more {
+.service-ribbon-action {
   max-height: 0;
+
   margin-top: 0;
+  padding-top: 0;
 
   display: flex;
   align-items: center;
@@ -309,11 +559,11 @@
 
   opacity: 0;
 
-  border-top: 1px solid
-    rgba(255, 255, 255, 0.38);
+  border-top:
+    1px solid rgba(255, 255, 255, 0.3);
 
-  font-size: 10px;
-  font-weight: 900;
+  font-size: 9px;
+  font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 
@@ -327,67 +577,226 @@
     transform 500ms var(--ease-out);
 }
 
-.service-card.is-active
-  .service-learn-more {
-  max-height: 60px;
-  margin-top: 24px;
-  padding-top: 18px;
+.service-ribbon-card:hover
+  .service-ribbon-action,
+.service-ribbon-card:focus-within
+  .service-ribbon-action {
+  max-height: 52px;
+
+  margin-top: 20px;
+  padding-top: 15px;
 
   opacity: 1;
   transform: translateY(0);
 }
 
-/* MOBILE ACTION */
+/* ===================================
+   BOTTOM INTERFACE
+=================================== */
+
+.services-interface {
+  position: relative;
+  z-index: 7;
+
+  min-height: clamp(62px, 9vh, 90px);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+}
+
+.services-counter {
+  width: min(300px, 28vw);
+
+  display: grid;
+  grid-template-columns:
+    auto 1fr auto;
+  align-items: center;
+
+  gap: 15px;
+
+  color: var(--text-secondary);
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+
+.services-current {
+  color: var(--accent-pink);
+
+  font-size: 15px;
+}
+
+.services-counter-line {
+  width: 100%;
+  height: 1px;
+
+  background: var(--border);
+}
+
+.services-scroll-hint {
+  color: var(--text-secondary);
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.services-scroll-hint::before {
+  content: "";
+
+  width: 7px;
+  height: 7px;
+
+  display: inline-block;
+
+  margin-right: 12px;
+
+  background: var(--accent-pink);
+  border-radius: 50%;
+
+  animation:
+    services-scroll-pulse
+    1.8s ease-in-out infinite;
+}
+
+/* ===================================
+   PROGRESS
+=================================== */
+
+.services-progress {
+  position: absolute;
+  z-index: 8;
+
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  height: 2px;
+
+  overflow: hidden;
+
+  background: var(--border);
+}
+
+.services-progress span {
+  position: absolute;
+  inset: 0;
+
+  display: block;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--accent-pink),
+      var(--accent-purple)
+    );
+
+  transform-origin: left;
+}
+
+/* ===================================
+   MOBILE ACTION
+=================================== */
 
 .services-mobile-action {
   display: none;
-
-  margin-top: 38px;
 }
 
-/* LARGE DISPLAY */
+/* ===================================
+   ANIMATIONS
+=================================== */
 
-@media (min-width: 2200px) {
-  .services-grid {
-    height: 980px;
+@keyframes service-ribbon-gif-reveal {
+  from {
+    opacity: 0;
   }
 
-  .service-name {
-    font-size: 54px;
+  to {
+    opacity: 1;
   }
 }
 
-/* TABLET */
+@keyframes services-orb-float {
+  0%,
+  100% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      translate3d(-35px, 24px, 0)
+      scale(1.08);
+  }
+}
+
+@keyframes services-scroll-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.75);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
+
+/* ===================================
+   TABLET
+=================================== */
 
 @media (max-width: 1024px) {
+  .services-showcase {
+    height: 620vh;
+  }
+
   .services-heading {
-    align-items: flex-start;
+    min-height: 250px;
+    align-items: flex-end;
   }
 
-  .services-grid {
-    height: 650px;
-  }
-
-  .service-name {
-    font-size: clamp(24px, 3vw, 34px);
+  .service-ribbon-card {
+    width: clamp(290px, 42vw, 420px);
+    height: clamp(360px, 48vh, 540px);
   }
 }
 
-/* MOBILE */
+/* ===================================
+   MOBILE
+=================================== */
 
 @media (max-width: 760px) {
   .services-showcase {
-    padding-block:
-      86px
-      80px;
+    height: 540vh;
   }
 
   .services-heading {
-    margin-bottom: 34px;
+    min-height: 230px;
+
+    align-items: flex-start;
+
+    padding-top: 92px;
+    padding-bottom: 24px;
+  }
+
+  .services-heading-copy {
+    max-width: 100%;
   }
 
   .services-title {
-    font-size: clamp(42px, 13vw, 62px);
+    max-width: 540px;
+
+    font-size:
+      clamp(40px, 12vw, 58px);
+
     line-height: 0.94;
   }
 
@@ -395,79 +804,78 @@
     display: none;
   }
 
-  .services-grid {
-    height: auto;
-
-    display: grid;
-    grid-template-columns: 1fr;
-
-    padding-inline: var(--page-padding);
-    gap: 14px;
+  .services-ribbon-window {
+    align-items: center;
   }
 
-  .service-card,
-  .services-grid.has-active-service
-    .service-card,
-  .services-grid.has-active-service
-    .service-card.is-active {
+  .services-ribbon-track {
+    gap: 18px;
+    padding-inline: 8vw;
+  }
+
+  .service-ribbon-card {
+    width: 76vw;
+    max-width: 360px;
+
+    height: min(49vh, 470px);
+
+    border-radius: 20px;
+  }
+
+  .service-ribbon-content h3 {
+    font-size:
+      clamp(30px, 9vw, 42px);
+  }
+
+  .service-ribbon-action {
+    display: none;
+  }
+
+  .services-interface {
+    min-height: 76px;
+  }
+
+  .services-counter {
     width: 100%;
-    height: min(68svh, 540px);
-
-    opacity: 1;
   }
 
-  .service-card.is-active
-    .service-image,
-  .service-card.is-active
-    .service-gif {
-    transform: scale(1.03);
-  }
-
-  .service-name {
-    max-width: 90%;
-
-    font-size: clamp(30px, 9vw, 42px);
-  }
-
-  .service-learn-more,
-  .service-card.is-active
-    .service-learn-more {
-    max-height: 60px;
-    margin-top: 20px;
-    padding-top: 16px;
-
-    opacity: 1;
-    transform: none;
+  .services-scroll-hint {
+    display: none;
   }
 
   .services-mobile-action {
-    display: block;
-  }
-}
-
-/* TOUCH DEVICES */
-
-@media (hover: none) {
-  .service-card {
-    opacity: 1;
-  }
-
-  .service-gif {
     display: none;
   }
 }
 
-/* REDUCED MOTION */
+/* ===================================
+   TOUCH DEVICES
+=================================== */
+
+@media (hover: none) {
+  .service-ribbon-gif {
+    display: none;
+  }
+}
+
+/* ===================================
+   REDUCED MOTION
+=================================== */
 
 @media (prefers-reduced-motion: reduce) {
-  .service-card,
-  .service-image,
-  .service-gif,
-  .service-arrow,
-  .service-name,
-  .service-learn-more,
+  .services-orb,
+  .services-scroll-hint::before,
+  .service-ribbon-gif {
+    animation: none;
+  }
+
+  .service-ribbon-card,
+  .service-ribbon-image,
+  .service-ribbon-gif,
+  .service-ribbon-arrow,
+  .service-ribbon-content h3,
+  .service-ribbon-action,
   .services-view-all {
     transition: none;
-    animation: none;
   }
 }

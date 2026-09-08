@@ -1,0 +1,880 @@
+/* ===================================
+   SERVICE WAVE GRID SECTION
+=================================== */
+
+.service-wave-grid-section {
+  position: relative;
+  isolation: isolate;
+
+  width: 100%;
+  height: 500vh;
+
+  color: #ffffff;
+  background: #07071b;
+}
+
+.service-wave-grid-sticky {
+  position: sticky;
+  top: 0;
+
+  width: 100%;
+  height: 100svh;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  background: #07071b;
+}
+
+/* ===================================
+   BACKGROUND
+=================================== */
+
+.service-wave-grid-background {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+
+  overflow: hidden;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 76% 28%,
+      rgba(138, 56, 255, 0.12),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 18% 78%,
+      rgba(245, 0, 135, 0.09),
+      transparent 36%
+    ),
+    #07071b;
+}
+
+.service-wave-grid-background::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  opacity: 0.25;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.022) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.022) 1px,
+      transparent 1px
+    );
+
+  background-size: 78px 78px;
+
+  mask-image:
+    radial-gradient(
+      circle at center,
+      #000,
+      transparent 75%
+    );
+}
+
+.service-wave-grid-glow {
+  position: absolute;
+
+  display: block;
+
+  border-radius: 50%;
+
+  opacity: 0.18;
+  filter: blur(115px);
+}
+
+.service-wave-grid-glow-one {
+  top: 6%;
+  right: 6%;
+
+  width: min(38vw, 680px);
+  aspect-ratio: 1;
+
+  background: var(--accent-purple);
+
+  animation:
+    service-grid-glow
+    11s ease-in-out infinite;
+}
+
+.service-wave-grid-glow-two {
+  bottom: -10%;
+  left: 8%;
+
+  width: min(30vw, 520px);
+  aspect-ratio: 1;
+
+  background: var(--accent-pink);
+
+  animation:
+    service-grid-glow
+    14s ease-in-out infinite reverse;
+}
+
+/* ===================================
+   HEADER
+=================================== */
+
+.service-wave-grid-header {
+  position: relative;
+  z-index: 5;
+
+  min-height:
+    clamp(205px, 28vh, 315px);
+
+  padding-top:
+    clamp(95px, 12vh, 145px);
+
+  padding-bottom:
+    clamp(20px, 3vh, 38px);
+
+  will-change:
+    transform,
+    opacity;
+}
+
+.service-wave-grid-eyebrow {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  margin-bottom: 20px;
+
+  color: var(--accent-pink);
+
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.service-wave-grid-eyebrow-line {
+  width:
+    clamp(34px, 4vw, 64px);
+
+  height: 1px;
+
+  background: currentColor;
+}
+
+.service-wave-grid-heading-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: clamp(50px, 8vw, 140px);
+}
+
+.service-wave-grid-title {
+  max-width: 900px;
+
+  font-size:
+    clamp(44px, 5.2vw, 92px);
+
+  font-weight: 650;
+  line-height: 0.88;
+  letter-spacing: -0.065em;
+
+  text-wrap: balance;
+}
+
+.service-wave-grid-title span {
+  display: block;
+
+  color: transparent;
+
+  -webkit-text-stroke:
+    1px rgba(255, 255, 255, 0.72);
+}
+
+.service-wave-grid-intro {
+  max-width: 350px;
+
+  color: #b8b5c8;
+
+  font-size:
+    clamp(13px, 0.9vw, 16px);
+
+  line-height: 1.65;
+}
+
+/* ===================================
+   CARD STAGE
+=================================== */
+
+.service-wave-grid-stage {
+  position: relative;
+  z-index: 3;
+
+  flex: 1;
+  min-height: 0;
+
+  display: flex;
+  align-items: center;
+
+  perspective: 1600px;
+}
+
+.service-wave-grid {
+  position: relative;
+
+  width: 100%;
+
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  grid-template-rows:
+    repeat(2, minmax(0, 1fr));
+
+  gap:
+    clamp(10px, 1.15vw, 19px);
+
+  transform-style: preserve-3d;
+}
+
+/* ===================================
+   CARD
+=================================== */
+
+.service-wave-grid-card {
+  position: relative;
+
+  min-width: 0;
+
+  height:
+    clamp(185px, 24vh, 275px);
+
+  overflow: hidden;
+
+  background: #0d0b22;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius:
+    clamp(13px, 1vw, 20px);
+
+  box-shadow:
+    0 25px 70px
+      rgba(0, 0, 0, 0.3);
+
+  transform-origin: center;
+  transform-style: preserve-3d;
+
+  will-change:
+    transform,
+    opacity,
+    clip-path;
+
+  transition:
+    border-color 350ms ease,
+    box-shadow 450ms ease;
+}
+
+.service-wave-grid-card:hover {
+  z-index: 10;
+
+  border-color:
+    rgba(245, 0, 135, 0.68);
+
+  box-shadow:
+    0 36px 95px
+      rgba(0, 0, 0, 0.45),
+    0 0 52px
+      rgba(245, 0, 135, 0.18);
+}
+
+.service-wave-grid-link {
+  position: absolute;
+  inset: 0;
+
+  display: block;
+
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+/* ===================================
+   IMAGE / GIF
+=================================== */
+
+.service-wave-grid-media {
+  position: absolute;
+  inset: 0;
+
+  overflow: hidden;
+}
+
+.service-wave-grid-image,
+.service-wave-grid-gif {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  transition:
+    transform 900ms var(--ease-out),
+    filter 500ms ease,
+    opacity 350ms ease;
+}
+
+.service-wave-grid-image {
+  z-index: 1;
+
+  filter:
+    saturate(0.78)
+    contrast(1.06)
+    brightness(0.82);
+
+  transform: scale(1.025);
+}
+
+.service-wave-grid-gif {
+  z-index: 2;
+
+  animation:
+    service-grid-gif-reveal
+    350ms ease both;
+}
+
+.service-wave-grid-card:hover
+  .service-wave-grid-image,
+.service-wave-grid-card:hover
+  .service-wave-grid-gif {
+  transform: scale(1.085);
+}
+
+/* ===================================
+   IMAGE OVERLAY
+=================================== */
+
+.service-wave-grid-overlay {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(7, 7, 27, 0.38) 0%,
+      rgba(7, 7, 27, 0.04) 43%,
+      rgba(7, 7, 27, 0.93) 100%
+    );
+}
+
+.service-wave-grid-shine {
+  position: absolute;
+  z-index: 4;
+
+  top: -30%;
+  bottom: -30%;
+  left: -42%;
+
+  width: 30%;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.17),
+      transparent
+    );
+
+  transform:
+    skewX(-16deg)
+    translateX(-190%);
+
+  transition:
+    transform 1s var(--ease-out);
+}
+
+.service-wave-grid-card:hover
+  .service-wave-grid-shine {
+  transform:
+    skewX(-16deg)
+    translateX(550%);
+}
+
+/* ===================================
+   CARD TOP
+=================================== */
+
+.service-wave-grid-top {
+  position: absolute;
+  z-index: 5;
+
+  top: clamp(14px, 1.4vw, 23px);
+  right: clamp(14px, 1.4vw, 23px);
+  left: clamp(14px, 1.4vw, 23px);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: #ffffff;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.17em;
+}
+
+.service-wave-grid-arrow {
+  width: 34px;
+  height: 34px;
+
+  display: grid;
+  place-items: center;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.48);
+
+  border-radius: 50%;
+
+  font-size: 14px;
+
+  transition:
+    color 300ms ease,
+    background-color 300ms ease,
+    border-color 300ms ease,
+    transform 450ms var(--ease-out);
+}
+
+.service-wave-grid-card:hover
+  .service-wave-grid-arrow {
+  color: #ffffff;
+  background: var(--accent-pink);
+  border-color: var(--accent-pink);
+
+  transform: rotate(45deg);
+}
+
+/* ===================================
+   CARD CONTENT
+=================================== */
+
+.service-wave-grid-content {
+  position: absolute;
+  z-index: 5;
+
+  right: clamp(17px, 1.6vw, 27px);
+  bottom: clamp(17px, 1.8vw, 28px);
+  left: clamp(17px, 1.6vw, 27px);
+
+  color: #ffffff;
+}
+
+.service-wave-grid-content > p {
+  margin-bottom: 8px;
+
+  color:
+    rgba(255, 255, 255, 0.63);
+
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.service-wave-grid-content h3 {
+  max-width: 340px;
+
+  font-size:
+    clamp(23px, 2vw, 36px);
+
+  font-weight: 700;
+  line-height: 0.94;
+  letter-spacing: -0.045em;
+
+  text-wrap: balance;
+
+  transition:
+    transform 500ms var(--ease-out);
+}
+
+.service-wave-grid-card:hover
+  .service-wave-grid-content h3 {
+  transform: translateY(-5px);
+}
+
+.service-wave-grid-action {
+  max-height: 0;
+
+  margin-top: 0;
+  padding-top: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  overflow: hidden;
+
+  opacity: 0;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.3);
+
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  transform: translateY(10px);
+
+  transition:
+    max-height 450ms var(--ease-out),
+    margin-top 450ms var(--ease-out),
+    padding-top 450ms var(--ease-out),
+    opacity 300ms ease,
+    transform 450ms var(--ease-out);
+}
+
+.service-wave-grid-card:hover
+  .service-wave-grid-action,
+.service-wave-grid-card:focus-within
+  .service-wave-grid-action {
+  max-height: 48px;
+
+  margin-top: 13px;
+  padding-top: 11px;
+
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===================================
+   FOOTER
+=================================== */
+
+.service-wave-grid-footer {
+  position: relative;
+  z-index: 6;
+
+  min-height:
+    clamp(58px, 8vh, 82px);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+}
+
+.service-wave-grid-counter {
+  width: min(290px, 28vw);
+
+  display: grid;
+  grid-template-columns:
+    auto 1fr auto;
+
+  align-items: center;
+
+  gap: 15px;
+
+  color: #b8b5c8;
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+
+.service-wave-grid-counter
+  span:first-child {
+  color: var(--accent-pink);
+}
+
+.service-wave-grid-counter-line {
+  width: 100%;
+  height: 1px;
+
+  background:
+    rgba(255, 255, 255, 0.18);
+}
+
+.service-wave-grid-view-all {
+  min-width: max-content;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 25px;
+
+  padding-block: 13px;
+
+  color: #ffffff;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.55);
+
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  transition:
+    gap 400ms var(--ease-out),
+    color 300ms ease,
+    border-color 300ms ease;
+}
+
+.service-wave-grid-view-all:hover {
+  gap: 36px;
+
+  color: var(--accent-pink);
+  border-color: var(--accent-pink);
+}
+
+/* ===================================
+   PROGRESS BAR
+=================================== */
+
+.service-wave-grid-progress {
+  position: absolute;
+  z-index: 8;
+
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  height: 2px;
+
+  overflow: hidden;
+
+  background:
+    rgba(255, 255, 255, 0.1);
+}
+
+.service-wave-grid-progress span {
+  position: absolute;
+  inset: 0;
+
+  display: block;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--accent-pink),
+      var(--accent-purple)
+    );
+
+  transform-origin: left;
+}
+
+/* ===================================
+   ANIMATIONS
+=================================== */
+
+@keyframes service-grid-gif-reveal {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes service-grid-glow {
+  0%,
+  100% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      translate3d(-34px, 27px, 0)
+      scale(1.08);
+  }
+}
+
+/* ===================================
+   TABLET
+=================================== */
+
+@media (max-width: 1100px) {
+  .service-wave-grid-section {
+    height: 460vh;
+  }
+
+  .service-wave-grid-header {
+    min-height: 245px;
+  }
+
+  .service-wave-grid-heading-row {
+    gap: 45px;
+  }
+
+  .service-wave-grid-intro {
+    max-width: 280px;
+  }
+
+  .service-wave-grid-card {
+    height:
+      clamp(175px, 22vh, 235px);
+  }
+
+  .service-wave-grid-content h3 {
+    font-size:
+      clamp(20px, 2.4vw, 29px);
+  }
+}
+
+/* ===================================
+   MOBILE
+=================================== */
+
+@media (max-width: 760px) {
+  .service-wave-grid-section {
+    height: auto;
+  }
+
+  .service-wave-grid-sticky {
+    position: relative;
+
+    height: auto;
+    min-height: auto;
+
+    overflow: hidden;
+
+    padding-block:
+      90px 80px;
+  }
+
+  .service-wave-grid-header {
+    min-height: auto;
+
+    padding-block: 0 55px;
+
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .service-wave-grid-heading-row {
+    display: block;
+  }
+
+  .service-wave-grid-title {
+    font-size:
+      clamp(45px, 14vw, 68px);
+
+    line-height: 0.9;
+  }
+
+  .service-wave-grid-intro {
+    max-width: 420px;
+
+    margin-top: 27px;
+
+    font-size: 14px;
+  }
+
+  .service-wave-grid-stage {
+    display: block;
+  }
+
+  .service-wave-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+
+    gap: 15px;
+  }
+
+  .service-wave-grid-card {
+    width: 100%;
+    height: min(62svh, 500px);
+
+    opacity: 1 !important;
+
+    clip-path: none !important;
+
+    transform: none !important;
+  }
+
+  .service-wave-grid-content h3 {
+    max-width: 90%;
+
+    font-size:
+      clamp(30px, 9vw, 43px);
+  }
+
+  .service-wave-grid-action {
+    max-height: 50px;
+
+    margin-top: 16px;
+    padding-top: 13px;
+
+    opacity: 1;
+    transform: none;
+  }
+
+  .service-wave-grid-footer {
+    align-items: stretch;
+    flex-direction: column;
+
+    gap: 22px;
+
+    margin-top: 38px;
+  }
+
+  .service-wave-grid-counter {
+    width: 100%;
+  }
+
+  .service-wave-grid-view-all {
+    width: max-content;
+  }
+}
+
+/* ===================================
+   TOUCH DEVICES
+=================================== */
+
+@media (hover: none) {
+  .service-wave-grid-gif {
+    display: none;
+  }
+}
+
+/* ===================================
+   REDUCED MOTION
+=================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .service-wave-grid-glow,
+  .service-wave-grid-gif {
+    animation: none;
+  }
+
+  .service-wave-grid-card,
+  .service-wave-grid-image,
+  .service-wave-grid-gif,
+  .service-wave-grid-arrow,
+  .service-wave-grid-content h3,
+  .service-wave-grid-action,
+  .service-wave-grid-shine,
+  .service-wave-grid-view-all {
+    transition: none;
+  }
+}
