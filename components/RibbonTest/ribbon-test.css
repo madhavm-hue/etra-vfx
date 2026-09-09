@@ -1,0 +1,248 @@
+.ribbon-test-webgl {
+  position: relative;
+  width: 100%;
+  height: 600vh;
+  color: #fff;
+  background: #07071b;
+}
+
+.ribbon-test-webgl__sticky {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 48% 72%, rgba(245, 0, 135, 0.16), transparent 36%),
+    radial-gradient(circle at 72% 38%, rgba(138, 56, 255, 0.14), transparent 40%),
+    linear-gradient(135deg, #07071b 0%, #0d0925 52%, #08071c 100%);
+}
+
+.ribbon-test-webgl__sticky::after {
+  content: "";
+  position: absolute;
+  z-index: 20;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 110px rgba(0, 0, 0, 0.45);
+}
+
+.ribbon-test-webgl__glow {
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  bottom: -30%;
+  width: min(96vw, 1700px);
+  aspect-ratio: 2 / 1;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse,
+    rgba(245, 0, 135, 0.22),
+    rgba(138, 56, 255, 0.1) 42%,
+    transparent 73%
+  );
+  filter: blur(80px);
+  transform: translateX(-50%);
+}
+
+.ribbon-test-webgl__intro {
+  position: absolute;
+  z-index: 30;
+  top: clamp(38px, 6vh, 78px);
+  left: var(--page-padding, clamp(24px, 4vw, 80px));
+  max-width: 390px;
+  pointer-events: none;
+}
+
+.ribbon-test-webgl__intro > span {
+  display: block;
+  margin-bottom: 17px;
+  color: #f50087;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.ribbon-test-webgl__intro p {
+  margin: 0;
+  max-width: 380px;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: clamp(12px, 0.9vw, 15px);
+  line-height: 1.65;
+}
+
+.ribbon-test-webgl__canvas {
+  position: absolute;
+  z-index: 10;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: pan-y;
+}
+
+.ribbon-test-webgl__word {
+  position: absolute;
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.09);
+  font-size: clamp(90px, 11.5vw, 220px);
+  font-weight: 500;
+  line-height: 0.78;
+  letter-spacing: -0.075em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform, opacity;
+}
+
+.ribbon-test-webgl__word--top {
+  top: 37%;
+  left: 0;
+}
+
+.ribbon-test-webgl__word--bottom {
+  right: 0;
+  bottom: 21%;
+}
+
+.ribbon-test-webgl__hover-card {
+  position: fixed;
+  z-index: 40;
+  min-width: 190px;
+  padding: 17px 19px;
+  pointer-events: none;
+  opacity: 0;
+  color: #fff;
+  border: 1px solid rgba(245, 0, 135, 0.7);
+  background: rgba(7, 7, 27, 0.84);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.44);
+  backdrop-filter: blur(14px);
+  transition: opacity 180ms ease;
+  will-change: transform, opacity;
+}
+
+.ribbon-test-webgl__hover-card span,
+.ribbon-test-webgl__hover-card small {
+  display: block;
+  color: #f50087;
+  font-size: 8px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.ribbon-test-webgl__hover-card strong {
+  display: block;
+  margin: 10px 0 15px;
+  font-size: 22px;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+
+.ribbon-test-webgl__progress {
+  position: absolute;
+  z-index: 30;
+  left: var(--page-padding, clamp(24px, 4vw, 80px));
+  bottom: clamp(24px, 4vh, 50px);
+  width: min(360px, 30vw);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+
+.ribbon-test-webgl__progress > span:first-child {
+  color: #f50087;
+}
+
+.ribbon-test-webgl__progress div {
+  position: relative;
+  width: 100%;
+  height: 1px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.ribbon-test-webgl__progress i {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: linear-gradient(90deg, #f50087, #8a38ff);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.ribbon-test-webgl__scroll-label {
+  position: absolute;
+  z-index: 30;
+  right: var(--page-padding, clamp(24px, 4vw, 80px));
+  bottom: clamp(24px, 4vh, 50px);
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.ribbon-test-webgl__scroll-label::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  display: inline-block;
+  margin-right: 13px;
+  border-radius: 50%;
+  background: #f50087;
+  box-shadow: 0 0 18px rgba(245, 0, 135, 0.8);
+}
+
+@media (max-width: 760px) {
+  .ribbon-test-webgl {
+    height: 500vh;
+  }
+
+  .ribbon-test-webgl__intro {
+    top: 36px;
+    left: 20px;
+    max-width: 255px;
+  }
+
+  .ribbon-test-webgl__word {
+    font-size: clamp(52px, 17vw, 78px);
+  }
+
+  .ribbon-test-webgl__progress {
+    left: 20px;
+    bottom: 25px;
+    width: 44vw;
+    gap: 9px;
+  }
+
+  .ribbon-test-webgl__scroll-label {
+    display: none;
+  }
+
+  .ribbon-test-webgl__hover-card {
+    min-width: 150px;
+    padding: 13px 15px;
+  }
+
+  .ribbon-test-webgl__hover-card strong {
+    font-size: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ribbon-test-webgl {
+    height: 180vh;
+  }
+}
