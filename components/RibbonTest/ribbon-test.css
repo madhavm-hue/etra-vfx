@@ -1,7 +1,7 @@
 .ribbon-test-webgl {
   position: relative;
   width: 100%;
-  height: 600vh;
+  height: 520vh;
   color: #fff;
   background: #07071b;
 }
@@ -207,7 +207,7 @@
 
 @media (max-width: 760px) {
   .ribbon-test-webgl {
-    height: 500vh;
+    height: 440vh;
   }
 
   .ribbon-test-webgl__intro {
@@ -245,4 +245,111 @@
   .ribbon-test-webgl {
     height: 180vh;
   }
+}
+/* =========================================
+   SITE THEME SUPPORT
+========================================= */
+
+.ribbon-test-webgl {
+  color: var(--text-primary);
+  background: var(--bg-primary);
+}
+
+.ribbon-test-webgl__sticky {
+  background:
+    radial-gradient(
+      circle at 48% 72%,
+      rgba(245, 0, 135, 0.16),
+      transparent 36%
+    ),
+    radial-gradient(
+      circle at 72% 38%,
+      rgba(138, 56, 255, 0.14),
+      transparent 40%
+    ),
+    var(--bg-primary);
+}
+
+.ribbon-test-webgl__intro p {
+  color: color-mix(
+    in srgb,
+    var(--text-secondary) 72%,
+    transparent
+  );
+}
+
+.ribbon-test-webgl__word {
+  color: color-mix(
+    in srgb,
+    var(--text-primary) 9%,
+    transparent
+  );
+}
+
+.ribbon-test-webgl__progress,
+.ribbon-test-webgl__scroll-label {
+  color: color-mix(
+    in srgb,
+    var(--text-secondary) 70%,
+    transparent
+  );
+}
+
+.ribbon-test-webgl__progress div {
+  background: color-mix(
+    in srgb,
+    var(--text-primary) 18%,
+    transparent
+  );
+}
+
+.ribbon-test-webgl__hover-card {
+  color: var(--text-primary);
+  background: color-mix(
+    in srgb,
+    var(--bg-primary) 86%,
+    transparent
+  );
+}
+
+/* Light mode refinements */
+
+html[data-theme="light"] .ribbon-test-webgl__sticky {
+  background:
+    radial-gradient(
+      circle at 48% 72%,
+      rgba(245, 0, 135, 0.1),
+      transparent 36%
+    ),
+    radial-gradient(
+      circle at 72% 38%,
+      rgba(138, 56, 255, 0.08),
+      transparent 40%
+    ),
+    var(--bg-primary);
+}
+
+html[data-theme="light"] .ribbon-test-webgl__sticky::after {
+  box-shadow: inset 0 0 100px rgba(17, 21, 47, 0.1);
+}
+
+html[data-theme="light"] .ribbon-test-webgl__word {
+  color: rgba(17, 21, 47, 0.075);
+}
+
+html[data-theme="light"] .ribbon-test-webgl__intro p,
+html[data-theme="light"] .ribbon-test-webgl__progress,
+html[data-theme="light"] .ribbon-test-webgl__scroll-label {
+  color: rgba(17, 21, 47, 0.58);
+}
+
+html[data-theme="light"] .ribbon-test-webgl__progress div {
+  background: rgba(17, 21, 47, 0.16);
+}
+
+html[data-theme="light"] .ribbon-test-webgl__hover-card {
+  color: #11152f;
+  background: rgba(255, 250, 252, 0.9);
+  border-color: rgba(245, 0, 135, 0.55);
+  box-shadow: 0 20px 60px rgba(17, 21, 47, 0.16);
 }

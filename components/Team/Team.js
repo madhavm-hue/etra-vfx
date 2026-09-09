@@ -21,7 +21,7 @@ const teamMembers = [
     name: "Shanmugasundaram Muthaiyah",
     role: "CEO",
     department: "Leadership",
-    image: "/images/team/team-member-01.jpg",
+    image: "/images/team/shanmugam.jpg",
     experience: "25+ years",
     bio: "As Chief Executive Officer, Shanmugasundaram Muthaiyah leads the studio’s vision, growth, and strategic direction across film, episodic, and digital content. His expertise spans VFX supervision, pipeline development, technology, talent development, and information security.",
     skills: [
@@ -36,7 +36,7 @@ const teamMembers = [
     name: "Gurubharran Dhakchinamoorthy",
     role: "Global Executive Producer",
     department: "Production",
-    image: "/images/team/team-member-02.jpg",
+    image: "/images/team/Guru.png",
     experience: "Global production leadership",
     bio: "Gurubharran oversees large-scale visual effects productions from concept through delivery. He brings together international creative and technical teams while ensuring production quality, operational efficiency, client alignment, and reliable delivery.",
     skills: [
@@ -81,7 +81,7 @@ const teamMembers = [
     name: "Sujitha B",
     role: "Head of Production",
     department: "Production",
-    image: "/images/team/team-member-05.jpg",
+    image: "/images/team/sujitha.jpeg",
     experience: "13+ years",
     bio: "Sujitha leads end-to-end production strategy across film, episodic, and digital projects. Her focus on planning, resource management, risk control, and communication helps teams deliver high-quality results on schedule.",
     skills: [
