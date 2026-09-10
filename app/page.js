@@ -4,6 +4,7 @@ import Services from "../components/Services/Services";
 import About from "../components/About/About";
 import Portfolio from "../components/Portfolio/Portfolio";
 import Clients from "../components/Common/Clients";
+import VortexSection from "../components/VortexTest/VortexSection";
 import Contact from "../components/Contact/Contact";
 import Footer from "../components/Footer/Footer";
 
@@ -18,6 +19,7 @@ export default function Home() {
         <About />
         <Portfolio />
         <Clients />
+        <VortexSection />
         <Contact />
       </main>
 

@@ -1,0 +1,606 @@
+.vortex-reference,
+.vortex-reference * {
+  box-sizing: border-box;
+}
+
+.vortex-reference {
+  position: relative;
+
+  width: 100%;
+  height: 300vh;
+  min-height: 1800px;
+
+  overflow: visible;
+
+  color: var(--text-primary, #ffffff);
+
+  background:
+    radial-gradient(
+      circle at 50% 82%,
+      rgba(245, 0, 135, 0.1),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 75% 30%,
+      rgba(138, 56, 255, 0.08),
+      transparent 36%
+    ),
+    var(--bg-primary, #07071b);
+}
+
+/* Sticky viewport */
+
+.vortex-reference__wrapper {
+  position: sticky;
+  z-index: 2;
+  top: 0;
+
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* Vignette */
+
+.vortex-reference__wrapper::after {
+  content: "";
+
+  position: absolute;
+  z-index: 10;
+  inset: 0;
+
+  pointer-events: none;
+
+  box-shadow:
+    inset 0 0 100px
+      rgba(0, 0, 0, 0.12);
+}
+
+/* Main title */
+
+.vortex-reference__title {
+  position: relative;
+  z-index: 3;
+
+  width: min(
+    65.833333vw,
+    1260px
+  );
+
+  margin: 0;
+
+  color: var(
+    --text-primary,
+    #ffffff
+  );
+
+  font-size: clamp(
+    48px,
+    5.277777vw,
+    102px
+  );
+
+  font-weight: 400;
+  line-height: 0.94;
+  letter-spacing: -0.055em;
+  text-align: center;
+  text-transform: uppercase;
+
+  pointer-events: none;
+}
+
+.vortex-reference__title span {
+  display: block;
+}
+
+.vortex-reference__title strong {
+  display: block;
+
+  color: var(
+    --text-secondary,
+    rgba(255, 255, 255, 0.56)
+  );
+
+  font: inherit;
+  font-weight: 400;
+}
+
+/* Circle wrapper */
+
+.vortex-reference__circles {
+  position: relative;
+  z-index: 2;
+
+  width: min(43vw, 760px);
+  height: min(43vw, 760px);
+
+  margin: -1.2vw auto 0;
+
+  flex: 0 0 auto;
+
+  transform-origin: center;
+  will-change: transform;
+}
+
+/* Seven stacked layers */
+
+.vortex-reference__circle {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  transform-origin: center center;
+  transform-box: fill-box;
+
+  will-change: transform;
+}
+
+.vortex-reference__circle:nth-child(1) {
+  z-index: 7;
+}
+
+.vortex-reference__circle:nth-child(2) {
+  z-index: 6;
+}
+
+.vortex-reference__circle:nth-child(3) {
+  z-index: 5;
+}
+
+.vortex-reference__circle:nth-child(4) {
+  z-index: 4;
+}
+
+.vortex-reference__circle:nth-child(5) {
+  z-index: 3;
+}
+
+.vortex-reference__circle:nth-child(6) {
+  z-index: 2;
+}
+
+.vortex-reference__circle:nth-child(7) {
+  z-index: 1;
+}
+
+.vortex-reference__circle svg {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: visible;
+
+  transform-origin: center center;
+}
+
+/* Circle strokes */
+
+.vortex-reference__outline {
+  fill: none;
+
+  stroke: var(
+    --text-primary,
+    #ffffff
+  );
+
+  stroke-width: 1;
+  opacity: 0.24;
+}
+
+.vortex-reference__guide {
+  fill: none;
+
+  stroke: var(
+    --text-primary,
+    #ffffff
+  );
+
+  stroke-width: 0.8;
+  opacity: 0.16;
+}
+
+/* Main SVG typography */
+
+.vortex-reference__main-text {
+  fill: var(
+    --text-primary,
+    #ffffff
+  );
+
+  font-size: 46px;
+  font-weight: 700;
+
+  letter-spacing: -0.055em;
+  text-anchor: middle;
+
+  opacity: 0.23;
+}
+
+/* Circular service text */
+
+.vortex-reference__ring-text {
+  fill: var(
+    --text-primary,
+    #ffffff
+  );
+
+  font-size: 11px;
+  font-weight: 500;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  opacity: 0.42;
+}
+
+/* Final layer clarity */
+
+.vortex-reference__circle:last-child
+  .vortex-reference__main-text {
+  opacity: 0.42;
+}
+
+.vortex-reference__circle:last-child
+  .vortex-reference__ring-text {
+  opacity: 0.7;
+}
+
+.vortex-reference__circle:last-child
+  .vortex-reference__outline {
+  opacity: 0.38;
+}
+
+/* Light mode */
+
+[data-theme="light"]
+  .vortex-reference {
+  background:
+    radial-gradient(
+      circle at 50% 82%,
+      rgba(245, 0, 135, 0.08),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 75% 30%,
+      rgba(138, 56, 255, 0.07),
+      transparent 36%
+    ),
+    var(--bg-primary, #fffafc);
+}
+
+[data-theme="light"]
+  .vortex-reference__wrapper::after {
+  box-shadow:
+    inset 0 0 100px
+      rgba(17, 21, 47, 0.05);
+}
+
+/* Loader */
+
+.vortex-test-loading {
+  display: grid;
+
+  width: 100%;
+  min-height: 100vh;
+
+  place-items: center;
+
+  background: var(
+    --bg-primary,
+    #07071b
+  );
+}
+
+.vortex-test-loading span {
+  width: 42px;
+  height: 42px;
+
+  border: 2px solid
+    rgba(255, 255, 255, 0.16);
+
+  border-top-color: var(
+    --accent-pink,
+    #f50087
+  );
+
+  border-radius: 50%;
+
+  animation:
+    vortex-reference-spin
+    800ms
+    linear
+    infinite;
+}
+
+[data-theme="light"]
+  .vortex-test-loading span {
+  border-color:
+    rgba(17, 21, 47, 0.14);
+
+  border-top-color: var(
+    --accent-pink,
+    #f50087
+  );
+}
+
+@keyframes vortex-reference-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Tablet */
+
+@media (max-width: 1024px) {
+  .vortex-reference {
+    height: 300vh;
+    min-height: 1800px;
+  }
+
+  .vortex-reference__title {
+    width: min(
+      88vw,
+      760px
+    );
+
+    font-size: clamp(
+      42px,
+      7vw,
+      72px
+    );
+  }
+
+  .vortex-reference__circles {
+    width: min(
+      52vw,
+      520px
+    );
+
+    height: min(
+      52vw,
+      520px
+    );
+
+    margin-top: 6px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 767px) {
+  .vortex-reference {
+    height: 260svh;
+    min-height: 1500px;
+  }
+
+  .vortex-reference__wrapper {
+    height: 100svh;
+    padding: 20px 0;
+  }
+
+  .vortex-reference__title {
+    width: calc(
+      100% - 40px
+    );
+
+    font-size: clamp(
+      35px,
+      10.5vw,
+      52px
+    );
+
+    line-height: 0.96;
+  }
+
+  .vortex-reference__circles {
+    width: min(
+      88vw,
+      390px
+    );
+
+    height: min(
+      88vw,
+      390px
+    );
+
+    margin-top: 14px;
+  }
+
+  .vortex-reference__main-text {
+    font-size: 42px;
+  }
+
+  .vortex-reference__ring-text {
+    font-size: 10px;
+  }
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .vortex-reference {
+    height: 100vh;
+    min-height: 620px;
+  }
+
+  .vortex-reference__circle {
+    transform:
+      rotate(0deg) !important;
+  }
+
+  .vortex-test-loading span {
+    animation: none;
+  }
+}
+/* ===================================
+   VORTEX — DARK / LIGHT THEME
+=================================== */
+
+/* Dark mode */
+
+html[data-theme="dark"]
+  .vortex-reference,
+[data-theme="dark"]
+  .vortex-reference {
+  color: #ffffff;
+
+  background:
+    radial-gradient(
+      circle at 50% 78%,
+      rgba(245, 0, 135, 0.14),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 76% 30%,
+      rgba(138, 56, 255, 0.12),
+      transparent 38%
+    ),
+    #07071b;
+}
+
+html[data-theme="dark"]
+  .vortex-reference__title,
+html[data-theme="dark"]
+  .vortex-reference__main-text,
+html[data-theme="dark"]
+  .vortex-reference__ring-text,
+[data-theme="dark"]
+  .vortex-reference__title,
+[data-theme="dark"]
+  .vortex-reference__main-text,
+[data-theme="dark"]
+  .vortex-reference__ring-text {
+  color: #ffffff;
+  fill: #ffffff;
+}
+
+html[data-theme="dark"]
+  .vortex-reference__title strong,
+[data-theme="dark"]
+  .vortex-reference__title strong {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+html[data-theme="dark"]
+  .vortex-reference__outline,
+html[data-theme="dark"]
+  .vortex-reference__guide,
+[data-theme="dark"]
+  .vortex-reference__outline,
+[data-theme="dark"]
+  .vortex-reference__guide {
+  stroke: #ffffff;
+}
+
+/* Light mode */
+
+html[data-theme="light"]
+  .vortex-reference,
+[data-theme="light"]
+  .vortex-reference {
+  color: #11152f;
+
+  background:
+    radial-gradient(
+      circle at 50% 78%,
+      rgba(245, 0, 135, 0.08),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 76% 30%,
+      rgba(138, 56, 255, 0.08),
+      transparent 38%
+    ),
+    #fffafc;
+}
+
+html[data-theme="light"]
+  .vortex-reference__title,
+html[data-theme="light"]
+  .vortex-reference__main-text,
+html[data-theme="light"]
+  .vortex-reference__ring-text,
+[data-theme="light"]
+  .vortex-reference__title,
+[data-theme="light"]
+  .vortex-reference__main-text,
+[data-theme="light"]
+  .vortex-reference__ring-text {
+  color: #11152f;
+  fill: #11152f;
+}
+
+html[data-theme="light"]
+  .vortex-reference__title strong,
+[data-theme="light"]
+  .vortex-reference__title strong {
+  color: rgba(17, 21, 47, 0.48);
+}
+
+html[data-theme="light"]
+  .vortex-reference__outline,
+html[data-theme="light"]
+  .vortex-reference__guide,
+[data-theme="light"]
+  .vortex-reference__outline,
+[data-theme="light"]
+  .vortex-reference__guide {
+  stroke: #11152f;
+}
+
+/* Light-mode layer visibility */
+
+html[data-theme="light"]
+  .vortex-reference__outline,
+[data-theme="light"]
+  .vortex-reference__outline {
+  opacity: 0.3;
+}
+
+html[data-theme="light"]
+  .vortex-reference__guide,
+[data-theme="light"]
+  .vortex-reference__guide {
+  opacity: 0.2;
+}
+
+html[data-theme="light"]
+  .vortex-reference__ring-text,
+[data-theme="light"]
+  .vortex-reference__ring-text {
+  opacity: 0.5;
+}
+
+/* Theme loader */
+
+html[data-theme="dark"]
+  .vortex-test-loading,
+[data-theme="dark"]
+  .vortex-test-loading {
+  background: #07071b;
+}
+
+html[data-theme="light"]
+  .vortex-test-loading,
+[data-theme="light"]
+  .vortex-test-loading {
+  background: #fffafc;
+}
+
+html[data-theme="light"]
+  .vortex-test-loading span,
+[data-theme="light"]
+  .vortex-test-loading span {
+  border-color:
+    rgba(17, 21, 47, 0.15);
+
+  border-top-color: #f50087;
+}
